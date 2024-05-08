@@ -15,12 +15,19 @@
       <div id="app">
         @include('admin.layouts.partials.sidebar')
          
-         <div id="main">
-            @include('admin.layouts.partials.nav')
+         <div id="main" class='layout-navbar navbar-fixed'>
+            {{-- @include('admin.layouts.partials.nav') --}}
             @include('admin.layouts.partials.header')
 
-            @yield('content')
-          
+            @if ($message = Session::get('success'))
+            <div class="alert alert-success text-center" role="alert">
+                {{ $message }}
+            </div>
+            @endif
+
+            <div id="main-content">
+                 @yield('content')
+            </div>
             @include('admin.layouts.partials.footer')
            
          </div>
