@@ -1,66 +1,184 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+## Laravel Role & Permission 
+     
+ PHP 8.2.12 | Laravel : 11.
+  
+ ## Usefull link : 
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+    https://medium.com/@mindaugasbernotas2/create-blog-with-laravel-11-and-vue-3-d66627180017
+	https://spatie.be/docs/laravel-permission/v6/basic-usage/new-app
+	https://www.regur.net/blog/multiple-authentication-in-laravel/
+	https://www.allphptricks.com/simple-laravel-10-user-roles-and-permissions/
+		   
+		   
+## Login Details
+	
+	Super Admin
+	-------------------------
+	admin1@gmail.com
+	12345678
+				 
+    Admin
+    --------------------------
+    admin2@gmail.com
+    12345678
+    
+    Category Manager
+    --------------------------
+    admin3@gmail.com
+    12345678
 
-## About Laravel
+				 
+			   
+ ## DB name = laravel11_blog	
+ =====================Steps/CMD=====================
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+    composer create-project --prefer-dist  laravel/laravel blog
+	cd blog
+    php artisan serve
+	php artisan migrate
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+    #Add AUTH
+    ---------------------------------
+    composer require laravel/ui --dev
+    php artisan ui bootstrap --auth
+    # npm install && npm run prod
+    
+    php artisan make:model Admin -m
+    php artisan migrate
+    php artisan make:controller Admin/HomeController		   
+    php artisan make:middleware IsAdmin	
+    
+    git add . && git commit -m "Setup auth scaffold"
 
-## Learning Laravel
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+    Add Role Permissions package
+    ----------------------------------
+    composer require spatie/laravel-permission
+    php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
+    php artisan migrate:fresh
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+    git add .
+    git commit -m "Add Spatie Laravel Permissions package"
+    
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+    
+    # Add `HasRoles` trait to User model
+    -----------------------------------------
+    use Spatie\Permission\Traits\HasRoles;
+    use HasRoles;
+    
+    git add . && git commit -m "Add HasRoles trait"
 
-## Laravel Sponsors
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+    #Seeder
+    -----------------------------------------
+    php artisan make:seed AdminTableSeeder
+    php artisan make:seeder PermissionSeeder
+    php artisan make:seeder RoleSeeder
+    php artisan make:seeder SuperAdminSeeder	
+    
+    php artisan db:seed
+    
 
-### Premium Partners
+    # Boostrap 5 Admin Free Template
+    --------------------------------------------
+    https://zuramai.github.io/mazer/
+    https://zuramai.github.io/mazer/docs/index.html
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+    
+    #Category Module
+    -----------------------------------------
+    php artisan make:model Category -m --requests			  
+    php artisan make:controller Admin/CategoryController --resource
 
-## Contributing
+    #Permissions Module
+    ------------------------------------------------			
+    php artisan make:controller Admin/PermissionsController --resource
+    Route::resource('permissions', PermissionsController::class);	
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+    #migrate
+    ----------------------------------------------
+    php artisan migrate:fresh --seed
+    
+    #Controllers
+    -----------------------------------------------		
+    php artisan make:controller Admin/RoleController --resource
+    php artisan make:controller Admin/UserController --resource			  
 
-## Code of Conduct
+    #request Validation
+    -----------------------------------------------       
+    php artisan make:request StoreRoleRequest
+    php artisan make:request UpdateRoleRequest
+    php artisan make:request StoreUserRequest
+    php artisan make:request UpdateUserRequest
+    
+    #views
+    --------------------------------------------------		       		  
+    php artisan make:view admin.users.index
+    php artisan make:view admin.users.create
+    php artisan make:view admin.users.edit
+    php artisan make:view admin.users.show
+    php artisan make:view admin.roles.index
+    php artisan make:view admin.roles.create
+    php artisan make:view admin.roles.edit
+    php artisan make:view admin.roles.show
+    php artisan make:view admin.categories.index
+    php artisan make:view admin.categories.create
+    php artisan make:view admin.categories.edit
+    php artisan make:view admin.categories.show
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+    
+    
+    #ClearCache
+    --------------------------------------------------		  
+    php artisan optimize:clear
 
-## Security Vulnerabilities
+    #Roles
+    ----------------------------------------------------
+    super-admin
+    admin
+    category-manager
+    
+    #Permissions
+    ----------------------------------------------------
+    $permissions = [
+    'list-role',
+    'create-role',
+    'edit-role',
+    'delete-role',
+    'list-user',
+    'create-user',
+    'edit-user',
+    'delete-user',
+    'list-category',
+    'create-category',
+    'edit-category',
+    'delete-category'
+    ];
+    
+    #Others
+    ----------------------------------------------------
+    @php
+    $user = Auth::guard('admin')->user();    
+    @endphp
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+    @if($user->hasAnyRole(['super-admin', 'admin']))
+    @endif
 
-## License
+    @if($user->can('list-category'))
+        {{-- <h1>list-category</h1> --}}
+    @endif
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+    $user->hasPermissionTo('publish articles', 'admin');
+
+    @haspermission('list-category','admin')
+        <h1>list-category</h1>
+    @endhaspermission.
+
+
+    @role('super-admin','admin')
+    I am a writer!
+    @else
+    I am not a writer...
+    @endrole		  
