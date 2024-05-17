@@ -40,6 +40,7 @@ class RoleSeeder extends Seeder
             'delete-category'
         ]);
         
+        //Category Manager
         $categoryManager = Role::create(['name' => 'category-manager','guard_name' => 'admin']);
         $categoryManager->givePermissionTo([
             'list-category',
@@ -47,6 +48,19 @@ class RoleSeeder extends Seeder
             'edit-category',
             'delete-category'
         ]);
+
+        //Blog Manager
+        $blogManager = Role::create(['name' => 'blog-manager','guard_name' => 'admin']);
+        $blogManager->givePermissionTo([
+            'list-category',
+            'create-category',
+            'edit-category',
+            'delete-category',
+            'list-blog',
+            'create-blog',
+            'edit-blog',
+            'delete-blog', 
+        ]);      
 
     }
 }

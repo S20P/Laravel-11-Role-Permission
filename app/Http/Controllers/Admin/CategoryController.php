@@ -15,10 +15,10 @@ class CategoryController extends Controller
 
     public function __construct()
     {
-        $this->middleware(['role_or_permission:super-admin|admin|category-manager|list-category|create-category|edit-category|delete-category,admin'], ['only' => ['index','show']]);
-        $this->middleware(['role_or_permission:super-admin|admin|category-manager|create-category,admin'], ['only' => ['create','store']]);
-        $this->middleware(['role_or_permission:super-admin|admin|category-manager|edit-category,admin'], ['only' => ['edit','update']]);
-        $this->middleware(['role_or_permission:super-admin|admin|category-manager|delete-category,admin'], ['only' => ['destroy']]);
+        $this->middleware(['role_or_permission:super-admin|admin|category-manager|blog-manager|list-category|create-category|edit-category|delete-category,admin'], ['only' => ['index','show']]);
+        $this->middleware(['role_or_permission:super-admin|admin|category-manager|blog-manager|create-category,admin'], ['only' => ['create','store']]);
+        $this->middleware(['role_or_permission:super-admin|admin|category-manager|blog-manager|edit-category,admin'], ['only' => ['edit','update']]);
+        $this->middleware(['role_or_permission:super-admin|admin|category-manager|blog-manager|delete-category,admin'], ['only' => ['destroy']]);
     }
 
        /**

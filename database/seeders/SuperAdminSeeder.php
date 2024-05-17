@@ -16,7 +16,7 @@ class SuperAdminSeeder extends Seeder
     {
          // Creating Super Admin User
          $superAdmin = Admin::create([
-            'name' => 'satish Super Admin', 
+            'name' => 'Super Admin', 
             'email' => 'admin1@gmail.com',
             'password' => Hash::make('12345678')
         ]);
@@ -25,7 +25,7 @@ class SuperAdminSeeder extends Seeder
 
         // Creating Admin User
         $admin = Admin::create([
-            'name' => 'satish-admin', 
+            'name' => 'Admin', 
             'email' => 'admin2@gmail.com',
             'password' => Hash::make('12345678')
         ]);
@@ -33,11 +33,19 @@ class SuperAdminSeeder extends Seeder
 
         // Creating Category Manager User
         $categoryManager = Admin::create([
-            'name' => 'satish-category', 
+            'name' => 'Category Manager', 
             'email' => 'admin3@gmail.com',
             'password' => Hash::make('12345678')
         ]);
-
         $categoryManager->assignRole('category-manager');
+
+           // Creating Blog Manager User
+        $blogManager = Admin::create([
+            'name' => 'Blog Manager', 
+            'email' => 'admin4@gmail.com',
+            'password' => Hash::make('12345678')
+        ]);
+         $blogManager->assignRole('blog-manager');
+
     }
 }
