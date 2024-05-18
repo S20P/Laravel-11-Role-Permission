@@ -22,10 +22,11 @@ class BlogController extends Controller
 
     public function show($slug)
     {
-        $blog = BlogPost::with("categories")->where("slug",$slug)->where('status',1)->first(); 
-        
+        $blog = BlogPost::with(["categories","metaInfos"])->where("slug",$slug)->where('status',1)->first(); 
+       
         return view('pages.blogs.blog-details', [
-            'blog' => $blog
+            'blog' => $blog,
+            'meta_info' => $blog->metaInfos??[]
         ]);
     }
 

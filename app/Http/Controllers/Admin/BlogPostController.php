@@ -10,6 +10,9 @@ use App\Http\Requests\UpdateBlogPostRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Category;
 use Illuminate\Support\Str;
+use App\Models\BlogMetaInfos;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Http\UploadedFile;
 class BlogPostController extends Controller
 {
     public function __construct()
@@ -45,10 +48,12 @@ class BlogPostController extends Controller
      */
     public function store(StoreBlogPostRequest $request)
     {
+
+       // dd($request->all());
       
         // BlogPost::create($request->all());
         try{
-    
+                DB::beginTransaction();
                 $user = Auth::guard('admin')->user();
 
                 $post = new BlogPost();
@@ -69,15 +74,45 @@ class BlogPostController extends Controller
                 }              
                 $post->save();
 
+
+                // categories 
                 $categories  = $request->categories_id;
                 if(count($categories) > 0){
                     $post->categories()->attach($categories);
                 }
 
+                //meta tags
+                if(isset($request->meta_info)){
+                    $meta_info  = $request->meta_info;
+                    if(count($meta_info) > 0){
+                    foreach ($meta_info as $meta) {
+                        $meta_key = $meta['meta_key'];
+                        $meta_value = $meta['meta_value'];
+                        if($meta_value){
+                            if($meta_value instanceof UploadedFile && $meta_value->isValid())
+                             {
+                                    $meta_file = $meta_value;                                    
+                                    $meta_filename = "meta".time() . '.' .  $meta_file->getClientOriginalExtension();
+                                    $imageStorePath = public_path('uploads/blogs');
+                                    $meta_file->move($imageStorePath, $meta_filename);
+                                    $meta_value = $meta_filename;
+                              }                    
+                            BlogMetaInfos::create([
+                                'blog_id' => $post->id,
+                                'meta_key' => $meta_key,
+                                'meta_value' => $meta_value,                           
+                            ]);
+                         }
+                      }
+                   }
+                }
+             
+                DB::commit();
                 return redirect()->route('admin.blogs.index')
                         ->withSuccess('New Blog is added successfully.');
         }
         catch(\Exception $e){
+            DB::rollBack();
             $errors = $e->getMessage();
             dd($errors);
             return redirect()->route('admin.blogs.index')
@@ -90,9 +125,10 @@ class BlogPostController extends Controller
      */
     public function show($id)
     {
-        $blog = BlogPost::with("categories")->find($id); 
+        $blog = BlogPost::with(["categories","metaInfos"])->find($id); 
         return view('admin.blogs.show', [
-            'blog' => $blog
+            'blog' => $blog,
+            'meta_info' => $blog->metaInfos->pluck("meta_value","meta_key",)??[]
         ]);
     }
 
@@ -101,14 +137,15 @@ class BlogPostController extends Controller
      */
     public function edit($id)
     {
-        $blog = BlogPost::with("categories")->find($id);     
+        $blog = BlogPost::with(["categories","metaInfos"])->find($id);     
         $categories = Category::all();
         $selectedCategores =  $blog->categories->pluck("id")->toArray();
        
         return view('admin.blogs.edit', [
             'blog' => $blog,
             'categories' => $categories,
-            'selectedCategores' => $selectedCategores
+            'selectedCategores' => $selectedCategores,
+            'meta_info' => $blog->metaInfos->pluck("meta_value","meta_key",)??[]
         ]);
     }
 
@@ -143,6 +180,34 @@ class BlogPostController extends Controller
                 $categories  = $request->categories_id;
                 if(count($categories) > 0){
                     $post->categories()->sync($categories);
+                }
+
+
+                   //meta tags
+                   if(isset($request->meta_info)){
+                    $meta_info  = $request->meta_info;
+                    if(count($meta_info) > 0){
+                    foreach ($meta_info as $meta) {
+                        $meta_key = $meta['meta_key'];
+                        if(isset($meta['meta_value'])){
+                            $meta_value = $meta['meta_value'];
+                            if($meta_value){
+                                if($meta_value instanceof UploadedFile && $meta_value->isValid())
+                                {
+                                        $meta_file = $meta_value;                                    
+                                        $meta_filename = "meta".time() . '.' .  $meta_file->getClientOriginalExtension();
+                                        $imageStorePath = public_path('uploads/blogs');
+                                        $meta_file->move($imageStorePath, $meta_filename);
+                                        $meta_value = $meta_filename;
+                                }                    
+                                BlogMetaInfos::where(['blog_id' => $id, 'meta_key' => $meta_key])->update([                             
+                                    'meta_key' => $meta_key,
+                                    'meta_value' => $meta_value,                           
+                                ]);
+                            }
+                        }
+                      }
+                   }
                 }
 
                 return redirect()->route('admin.blogs.index')

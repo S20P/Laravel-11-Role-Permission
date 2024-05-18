@@ -130,6 +130,79 @@
                                     </label>
                                 </div>
                             </div>
+
+                         
+                             <!----  Meta Infors ------->
+                             <div class="divider">
+                                <div class="divider-text">Meta Tags</div>
+                            </div>
+
+                            <div class="form-group field mb-3">
+                                <label for="title" class="col-form-label">Meta Title</label>
+                                <input type="hidden" name="meta_info[0][meta_key]" value="title">                                
+                                <input type="text" class="form-control" id="meta_title" name="meta_info[0][meta_value]" value="{{ $meta_info['title']??old('meta_info[0][meta_value]') }}">
+                            </div>
+
+                            <div class="form-group field mb-3">
+                                <label for="title" class="col-form-label">Meta Description</label>
+                                <input type="hidden" name="meta_info[1][meta_key]" value="description"> 
+                                <input type="text" class="form-control" id="meta_description" name="meta_info[1][meta_value]" value="{{ $meta_info['description']??old('meta_info[1][meta_value]') }}">
+                            </div>
+
+                            <div class="form-group field mb-3">
+                                <label for="title" class="col-form-label">Meta Keywords</label>
+                                <input type="hidden" name="meta_info[2][meta_key]" value="keywords"> 
+                                <input type="text" class="form-control" id="meta_keywords" name="meta_info[2][meta_value]" value="{{ $meta_info['keywords']??old('meta_info[2][meta_value]') }}">
+                            </div>
+
+                            <div class="form-group field mb-3">
+                                <label for="title" class="col-form-label">Meta Author</label>
+                                <input type="hidden" name="meta_info[3][meta_key]" value="author"> 
+                                <input type="text" class="form-control" id="meta_author" name="meta_info[3][meta_value]" value="{{ $meta_info['author']??old('meta_info[3][meta_value]') }}">
+                            </div>
+
+
+                            <div class="divider">
+                                <div class="divider-text"> Open Graph (for Social Media)</div>
+                            </div>
+
+                            <div class="form-group field mb-3">
+                                <label for="title" class="col-form-label">OG Type</label>
+                                <input type="hidden" name="meta_info[4][meta_key]" value="og_type">                                
+                                <input type="text" class="form-control" id="meta_og_type" name="meta_info[4][meta_value]" value="{{ $meta_info['og_type']??old('meta_info[4][meta_value]') }}">
+                            </div>
+
+                            <div class="form-group field mb-3">
+                                <label for="title" class="col-form-label">OG Title</label>
+                                <input type="hidden" name="meta_info[5][meta_key]" value="og_title">                                
+                                <input type="text" class="form-control" id="meta_og_title" name="meta_info[5][meta_value]" value="{{ $meta_info['og_title']??old('meta_info[5][meta_value]') }}">
+                            </div>
+
+                            <div class="form-group field mb-3">
+                                <label for="title" class="col-form-label">OG Description</label>
+                                <input type="hidden" name="meta_info[6][meta_key]" value="og_description"> 
+                                <input type="text" class="form-control" id="meta_og_description" name="meta_info[6][meta_value]" value="{{ $meta_info['og_description']??old('meta_info[6][meta_value]') }}">
+                            </div>                          
+                         
+
+                            <div class="col-md-6">
+                                <div class="form-group field mb-3">
+                                   <fieldset>
+                                       <div class="input-group mb-3">
+                                           <label for="">OG : Image</label>
+                                           <div class="input-group mb-3"> 
+                                               <input type="hidden" name="meta_info[7][meta_key]" value="og_image">                                  
+                                               <input type="file" name="meta_info[7][meta_value]" class="form-control"  accept="image/*">
+                                           </div>                                                
+                                       </div>                                      
+                                   </fieldset> 
+                                   @if($meta_info['og_image'])
+                                   <img src="{{ asset('uploads/blogs/'.$meta_info['og_image']) }}" class="img-fluid img-thumbnail" width="150">                                          
+                                   @endif
+                                </div>
+                           </div>
+
+                            <!----  Meta Infors END------->
                          
 
                             <div class="col-12 d-flex justify-content-end">

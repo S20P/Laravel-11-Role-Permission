@@ -30,6 +30,12 @@ class Blogs extends Model
         return $this->belongsToMany(Category::class);
     }
 
+
+    public function metaInfos()
+    {
+        return $this->hasMany(BlogMetaInfos::class,'blog_id');
+    }
+
     //Accessor
     protected function status(): Attribute
     {
@@ -37,5 +43,8 @@ class Blogs extends Model
             get: fn (string $value) => ($value ? "Publish" : "Draft"),
         );
     }
+
+
+    
 
 }

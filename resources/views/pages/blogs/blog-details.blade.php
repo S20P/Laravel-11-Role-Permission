@@ -1,6 +1,43 @@
 
 
 @extends('layouts.app')
+
+@if($meta_info && count($meta_info) > 0)    
+  @foreach($meta_info as $meta)
+      @switch($meta['meta_key'])
+          @case("title")
+              @section('meta_title', $meta['meta_value'])
+          @break
+          @case("description")
+              @section('meta_description', $meta['meta_value'])
+          @break
+          @case("keywords")
+               @section('meta_keywords', $meta['meta_value'])  
+          @break
+          @case("author")
+               @section('meta_author', $meta['meta_value'])
+          @break
+          @case("og_type")
+               @section('meta_og_type', $meta['meta_value'])
+          @break
+          @case("og_title")
+               @section('meta_og_title', $meta['meta_value'])
+          @break
+          @case("og_description")
+                @section('meta_og_description', $meta['meta_value'])
+          @break
+          @case("og_image")
+               @php
+                    $meta_image = asset('uploads/blogs/'.$meta['meta_value']);
+               @endphp
+               @section('meta_og_image', $meta_image)
+          @break
+          @default              
+      @endswitch
+  @endforeach  
+@endif
+
+
 @section('content')
 <section class="page-title bg-2">
     <div class="container">
