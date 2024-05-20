@@ -27,6 +27,8 @@ class StoreBlogPostRequest extends FormRequest
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'categories_id' => ['required', 'array', 'min:1'],
             'categories_id.*' => ['required', 'integer', 'exists:categories,id'],
+            'settings_id' => ['array', 'min:1'],
+            'settings_id.*' => ['integer', 'exists:settings,id'],
             'published_at' => 'required',   
         ];
     }

@@ -47,5 +47,14 @@ class SuperAdminSeeder extends Seeder
         ]);
          $blogManager->assignRole('blog-manager');
 
+
+       // Creating Setting Manager 
+        $settingManager = Admin::create([
+            'name' => 'Setting Manager', 
+            'email' => 'admin5@gmail.com',
+            'password' => Hash::make('12345678')
+        ]);
+         $settingManager->assignRole('setting-manager');
+
     }
 }

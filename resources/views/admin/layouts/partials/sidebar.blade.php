@@ -82,6 +82,13 @@
                               <span>Manage Category</span>
                            </a>
                     </li> 
+                    <li class="sidebar-item">
+                     <a href="{{ route('admin.settings.index') }}" class='sidebar-link'>
+                        <i class="bi bi-gear"></i>
+                        <span>Manage Settings</span>
+                     </a>
+                   </li> 
+                    
                @elseif($user->hasRole(['category-manager', 'admin','blog-manager']))
                         <li class="sidebar-item">
                            <a href="{{ route('admin.categories.index') }}" class='sidebar-link'>
@@ -99,6 +106,15 @@
                      <span>Manage Blog</span>
                   </a>
                </li> 
+               @endif
+
+               @if($user->hasRole(['admin','setting-manager']))
+               <li class="sidebar-item">
+                     <a href="{{ route('admin.settings.index') }}" class='sidebar-link'>
+                        <i class="bi bi-gear"></i>
+                        <span>Manage Settings</span>
+                     </a>
+                   </li> 
                @endif
 
             {{-- @haspermission('list-category','admin')

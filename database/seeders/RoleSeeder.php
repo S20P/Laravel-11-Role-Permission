@@ -60,7 +60,17 @@ class RoleSeeder extends Seeder
             'create-blog',
             'edit-blog',
             'delete-blog', 
-        ]);      
+        ]);  
+        
+        //Setting Manager
+
+        $settingManager = Role::create(['name' => 'setting-manager','guard_name' => 'admin']);
+        $settingManager->givePermissionTo([
+            'list-setting',
+            'create-setting',
+            'edit-setting',
+            'delete-setting', 
+        ]);  
 
     }
 }

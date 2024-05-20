@@ -63,6 +63,25 @@
                                 </div>
                             </div>
 
+
+                            <div class="field mb-3">
+                                <label class="label">Settings</label>
+                                <div class="control @error('settings_id') is-invalid @enderror">
+                                    <div class="select">
+                                        <select class="choices form-select multiple-remove" name="settings_id[]" multiple="multiple">
+                                            <optgroup label="Select setting">                                          
+                                              @foreach ($settings as $setting)
+                                                  <option value="{{ $setting->id }}">{{ ucfirst($setting->key) }}</option>
+                                              @endforeach 
+                                            </optgroup>
+                                            </select>
+                                    </div>
+                                    @if($errors->has('settings_id'))
+                                        <span class="text-danger">{{ $errors->first('settings_id') }}</span>
+                                    @endif
+                                </div>
+                            </div>
+
                             <div class="form-group field mb-3">
                                 <label for="title" class="col-form-label">Title</label>
                                 <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" value="{{ old('title') }}">

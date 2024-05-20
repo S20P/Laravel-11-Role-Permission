@@ -23,7 +23,7 @@ class DashboardController extends Controller
            $roles = $user->getRoleNames(); 
            $is_super_admin =  $user->hasRole('Super Admin');
            $is_super_admin_or_admin = $user->hasRole(['Super Admin', 'admin']);
-          // dd($is_super_admin_or_admin);
+      
 
         
            return view("admin.dashboard");

@@ -36,6 +36,11 @@ class Blogs extends Model
         return $this->hasMany(BlogMetaInfos::class,'blog_id');
     }
 
+    public function settings()
+    {
+        return $this->belongsToMany(Setting::class,'blogs_setting');
+    }
+
     //Accessor
     protected function status(): Attribute
     {

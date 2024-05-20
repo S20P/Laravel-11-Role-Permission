@@ -6,13 +6,13 @@ class AppMiddleware{
 
     public function __invoke(Middleware $middleware){
 
-        $middleware->append([
+        // $middleware->append([
           
-        ]);
+        // ]);
 
-        $middleware->appendToGroup('web',[
+        // $middleware->appendToGroup('web',[
            
-        ]);
+        // ]);
 
         $middleware->alias([
             'isAdmin' => \App\Http\Middleware\IsAdmin::class,

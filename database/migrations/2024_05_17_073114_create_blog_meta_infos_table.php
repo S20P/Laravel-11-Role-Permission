@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('blog_meta_infos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBiginteger('blog_id');
-            $table->string('meta_key');
+            $table->unsignedBiginteger('blog_id')->index();
+            $table->string('meta_key')->index();
             $table->longText('meta_value');           
             $table->integer('sort')->nullable();
             $table->boolean('status')->default(true);  

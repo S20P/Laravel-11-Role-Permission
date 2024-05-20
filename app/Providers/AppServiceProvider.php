@@ -6,6 +6,8 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 use App\Models\Admin;
 use Illuminate\Pagination\Paginator;
+use App\Models\Setting;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -13,10 +15,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
-    } // Gate::before(function ($user, $ability) {
-        //     return $user->hasRole('super-admin') ? true : null;
-        // });
+        
+        $this->app->singleton('base_settings', function () {
+            return Setting::whereIn('key',['header','footer'])->pluck('value','key')->toArray();
+        });
+
+    } 
 
     /**
      * Bootstrap any application services.
@@ -24,6 +28,12 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Paginator::useBootstrapFive();
+
+        view()->composer('*', function($view) {
+            $base_settings = app('base_settings');
+            $view->with(["common_settings"=>$base_settings]);
+        });
+        
     }
 
 

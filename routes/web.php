@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\PermissionsController;
 use App\Http\Controllers\Admin\BlogPostController;
+use App\Http\Controllers\Admin\SettingController;
 
 //FrontEnd
 use App\Http\Controllers\BlogController;
@@ -47,7 +48,7 @@ Route::group(['prefix' => 'admin', 'as'=>'admin.'],function(){
       'permissions' => PermissionsController::class,
       'roles' => RoleController::class,
       'users' => UserController::class,
-      'categories' => CategoryController::class,      
+      'categories' => CategoryController::class,        
     ]);
 
     Route::get('/blogs', [BlogPostController::class, 'index'])->name('blogs.index');
@@ -57,6 +58,15 @@ Route::group(['prefix' => 'admin', 'as'=>'admin.'],function(){
     Route::get('blogs/{id}', [BlogPostController::class, 'show'])->name('blogs.show');
     Route::put('blogs/{id}', [BlogPostController::class, 'update'])->name('blogs.update');
     Route::delete('blogs/{id}', [BlogPostController::class, 'destroy'])->name('blogs.destroy');
+
+    
+    Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
+    Route::get('settings/create', [SettingController::class, 'create'])->name('settings.create');
+    Route::post('settings', [SettingController::class, 'store'])->name('settings.store');
+    Route::get('settings/{id}/edit', [SettingController::class, 'edit'])->name('settings.edit');
+    Route::get('settings/{id}', [SettingController::class, 'show'])->name('settings.show');
+    Route::put('settings/{id}', [SettingController::class, 'update'])->name('settings.update');
+    Route::delete('settings/{id}', [SettingController::class, 'destroy'])->name('settings.destroy');
    
   });
 

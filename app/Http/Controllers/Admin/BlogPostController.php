@@ -13,6 +13,7 @@ use Illuminate\Support\Str;
 use App\Models\BlogMetaInfos;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\UploadedFile;
+use App\Models\Setting;
 class BlogPostController extends Controller
 {
     public function __construct()
@@ -40,7 +41,8 @@ class BlogPostController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('admin.blogs.create',['categories' => $categories]);
+        $settings = Setting::where('key',"block")->get();
+        return view('admin.blogs.create',['categories' => $categories,'settings'=>$settings]);
     }
 
     /**
@@ -81,14 +83,20 @@ class BlogPostController extends Controller
                     $post->categories()->attach($categories);
                 }
 
+                //settings                 
+                 $settings  = $request->settings_id??[];
+                 if(count($settings) > 0){
+                      $post->settings()->attach($settings);
+                 }
+
                 //meta tags
                 if(isset($request->meta_info)){
                     $meta_info  = $request->meta_info;
                     if(count($meta_info) > 0){
                     foreach ($meta_info as $meta) {
-                        $meta_key = $meta['meta_key'];
-                        $meta_value = $meta['meta_value'];
-                        if($meta_value){
+                        $meta_key = $meta['meta_key'];                       
+                        if(isset($meta['meta_value'])){
+                            $meta_value = $meta['meta_value'];
                             if($meta_value instanceof UploadedFile && $meta_value->isValid())
                              {
                                     $meta_file = $meta_value;                                    
@@ -125,10 +133,10 @@ class BlogPostController extends Controller
      */
     public function show($id)
     {
-        $blog = BlogPost::with(["categories","metaInfos"])->find($id); 
+        $blog = BlogPost::with(["categories","metaInfos","settings"])->find($id); 
         return view('admin.blogs.show', [
             'blog' => $blog,
-            'meta_info' => $blog->metaInfos->pluck("meta_value","meta_key",)??[]
+            'meta_info' => $blog->metaInfos->pluck("meta_value","meta_key")??[]
         ]);
     }
 
@@ -140,11 +148,16 @@ class BlogPostController extends Controller
         $blog = BlogPost::with(["categories","metaInfos"])->find($id);     
         $categories = Category::all();
         $selectedCategores =  $blog->categories->pluck("id")->toArray();
+
+        $settings = Setting::where('key',"block")->get();
+        $selectedSettings =  $blog->settings->pluck("id")->toArray();
        
         return view('admin.blogs.edit', [
             'blog' => $blog,
             'categories' => $categories,
             'selectedCategores' => $selectedCategores,
+            'settings' => $settings,
+            'selectedSettings' => $selectedSettings,
             'meta_info' => $blog->metaInfos->pluck("meta_value","meta_key",)??[]
         ]);
     }
@@ -180,6 +193,11 @@ class BlogPostController extends Controller
                 $categories  = $request->categories_id;
                 if(count($categories) > 0){
                     $post->categories()->sync($categories);
+                }
+
+                $settings  = $request->settings_id??[];
+                if(count($settings) > 0){
+                    $post->settings()->sync($settings);
                 }
 
 
@@ -228,6 +246,7 @@ class BlogPostController extends Controller
     {
         $blog = BlogPost::find($id); 
         $blog->categories()->detach();
+        $blog->settings()->detach();
         $blog->delete();
 
         return redirect()->route('admin.blogs.index')

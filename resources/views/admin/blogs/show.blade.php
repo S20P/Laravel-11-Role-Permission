@@ -94,6 +94,17 @@
                             </div>
 
 
+                            <div class="row">
+                                <label for="description" class="col-md-4 col-form-label text-md-end text-start"><strong>Settings:</strong></label>
+                                <div class="col-md-6" style="line-height: 35px;">
+                                     <ul>
+                                        @foreach ($blog->settings as $setting)
+                                        <li>{{ $setting->key }} : {{ $setting->value }}</li>
+                                        @endforeach
+                                     </ul>
+                                </div>
+                            </div>
+
                             @if($meta_info)
                             <!----  Meta Infors ------->
                             <div class="divider">

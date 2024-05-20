@@ -13,6 +13,9 @@ class BlogController extends Controller
 
     public function index()
     {
+
+        
+       
         $blogs = BlogPost::with("categories")->where('status',1)->latest()->paginate(6);
         
         return view('pages.blogs.blog', [
@@ -22,11 +25,12 @@ class BlogController extends Controller
 
     public function show($slug)
     {
-        $blog = BlogPost::with(["categories","metaInfos"])->where("slug",$slug)->where('status',1)->first(); 
-       
+        $blog = BlogPost::with(["categories","metaInfos","settings"])->where("slug",$slug)->where('status',1)->first(); 
+      
         return view('pages.blogs.blog-details', [
             'blog' => $blog,
-            'meta_info' => $blog->metaInfos??[]
+            'meta_info' => $blog->metaInfos??[],
+            'setting_info' => $blog->settings??[]
         ]);
     }
 

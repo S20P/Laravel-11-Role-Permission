@@ -30,7 +30,11 @@ class PermissionSeeder extends Seeder
             'list-blog',
             'create-blog',
             'edit-blog',
-            'delete-blog',            
+            'delete-blog',   
+            'list-setting',
+            'create-setting',
+            'edit-setting',
+            'delete-setting',         
          ];
 
          foreach ($permissions as $permission) {

@@ -37,7 +37,6 @@
   @endforeach  
 @endif
 
-
 @section('content')
 <section class="page-title bg-2">
     <div class="container">
@@ -293,4 +292,15 @@
           </div>
       </div>
   </section>
+
+ <!-- Dynamic Block setting section -->
+  @if($setting_info && count($setting_info) > 0)   
+     @php
+          $block_setting = $setting_info->where('key',"block")->first();
+     @endphp
+     @if($block_setting)
+            {!! $block_setting['value'] !!}
+     @endif
+  @endif
   @endsection
+  <!-- Dynamic Block setting section :: END -->

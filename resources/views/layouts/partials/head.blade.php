@@ -27,3 +27,10 @@
 
 
  @stack('styles')
+
+<!-- common_setting_header --> 
+@if(isset($common_settings) && isset($common_settings['header']))
+{!! $common_settings['header'] !!}
+@endif
+<!-- common_setting_header  :: END-->
+

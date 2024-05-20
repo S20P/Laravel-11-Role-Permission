@@ -27,5 +27,12 @@
    <script src="{{asset('js/script.js')}}"></script>
 
 
-<script src="{{asset('js/common.js')}}"></script>
-@stack('scripts')
+   <script src="{{asset('js/common.js')}}"></script>
+
+   @stack('scripts')
+
+<!-- base_setting_footer --> 
+@if(isset($common_settings) && isset($common_settings['footer']))
+      {!! $common_settings['footer'] !!}
+@endif
+<!-- base_setting_footer  :: END--> 
