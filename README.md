@@ -9,24 +9,6 @@
 	https://www.regur.net/blog/multiple-authentication-in-laravel/
 	https://www.allphptricks.com/simple-laravel-10-user-roles-and-permissions/
 		   
-		   
-## Login Details
-	
-	Super Admin
-	-------------------------
-	admin1@gmail.com
-	12345678
-				 
-    Admin
-    --------------------------
-    admin2@gmail.com
-    12345678
-    
-    Category Manager
-    --------------------------
-    admin3@gmail.com
-    12345678
-
 				 
 			   
  ## DB name = laravel11_blog	
