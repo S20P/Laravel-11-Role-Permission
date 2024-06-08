@@ -21,7 +21,10 @@ class SettingSeeder extends Seeder
             ],
             [
                 "key" => "block", "value" => ""
-            ]                   
+            ],
+            [
+                "key" => "social_media_enabled", "value" => "active"
+            ]                      
          ];
 
          foreach ($settings as $setting) {

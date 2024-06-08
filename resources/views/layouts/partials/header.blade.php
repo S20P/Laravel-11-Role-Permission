@@ -25,6 +25,17 @@
 				</li>
 				<li class="nav-item"><a class="nav-link" href="service.html">Services</a></li>
 				<li class="nav-item"><a class="nav-link" href="pricing.html">Memebership</a></li>
+
+               <!-- Category Menus --->
+				@if(isset($g_category_menus) && is_array($g_category_menus))
+				@if(count($g_category_menus) > 0)
+					@foreach ($g_category_menus as $cate_menu_item)
+					<li class="nav-item"><a class="nav-link" href="{{route('blog.show.category',$cate_menu_item['slug'])}}">{{ $cate_menu_item['name'] }}</a></li>
+					@endforeach    
+				@endif
+				@endif
+				<!-- Category Menus END --->
+
 				<li class="nav-item"><a class="nav-link" href="{{route("blog")}}">Blog</a></li>
 
 				{{-- <li class="nav-item dropdown">

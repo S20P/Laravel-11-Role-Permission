@@ -20,10 +20,28 @@
       </div>
     </div>
   </section>
-  
+    
+  @if ($errors->any())
+  <div class="alert alert-danger">
+      <ul>
+          @foreach ($errors->all() as $error)
+              <li>{{ $error }}</li>
+          @endforeach
+      </ul>
+  </div>
+ @endif
+
   <!-- Section Blog start -->
   <section class="section blog bg-gray">
       <div class="container">
+
+        <div class="card border-0 rounded-0 mb-5">
+          <form action="#" class="search position-relative">
+              <input type="text" id="blogSearch" placeholder="Search" class="form-control">
+              <i class="ti-search"></i>
+          </form>
+       </div>
+
         <div id="blog_table_data">
             @include("pages.blogs.blog-items")
         </div>          

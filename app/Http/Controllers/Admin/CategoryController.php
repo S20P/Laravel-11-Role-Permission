@@ -9,6 +9,7 @@ use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
@@ -27,7 +28,7 @@ class CategoryController extends Controller
     public function index()
     {
         return view('admin.categories.index', [
-            'categories' => Category::latest()->paginate(3)
+            'categories' => Category::latest()->paginate(10)
         ]);
     }
 
@@ -44,7 +45,12 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        Category::create($request->all());
+
+        $input = $request->all();
+
+        $input['slug'] = Str::slug($input['name']);  
+        Category::create($input);
+      
         return redirect()->route('admin.categories.index')
                 ->withSuccess('New category is added successfully.');
     }
@@ -64,6 +70,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
+
         return view('admin.categories.edit', [
             'category' => $category
         ]);

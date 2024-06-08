@@ -55,7 +55,55 @@
                                     @endif
                                 </div>
                             </div>
+
+
+                            <div class="form-group field mb-3 row">
+                                <label for="" class="col-md-4 col-form-label text-md-end text-start">Is Show On Menu Status :  </label>
+                                <div class="col-md-6">
+                                        <div class="form-check form-check-inline pl-2">
+                                            <input class="form-check-input" type="radio" value="1" name="is_show_on_menu" id="is_show_on_menu_active" checked>
+                                            <label class="form-check-label" for="is_show_on_menu_active">
+                                                YES
+                                            </label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" value="0"  name="is_show_on_menu" id="is_show_on_menu_deactive">
+                                            <label class="form-check-label" for="is_show_on_menu_deactive">
+                                                NO
+                                            </label>
+                                        </div>
+                              </div>
+                            </div>
                             
+                            <div class="mb-3 row">
+                                <label for="menu_sort" class="col-md-4 col-form-label text-md-end text-start">Menu sort order </label>
+                                <div class="col-md-6">
+                                <input type="number" class="form-control @error('menu_sort') is-invalid @enderror" id="menu_sort" name="menu_sort" value="{{ old('menu_sort') }}">
+                                    @if ($errors->has('menu_sort'))
+                                        <span class="text-danger">{{ $errors->first('menu_sort') }}</span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group field mb-3 row">
+                                <label for="" class="col-md-4 col-form-label text-md-end text-start">Status :  </label>
+                                <div class="col-md-6">
+                                    <div class="form-check form-check-inline pl-2">
+                                        <input class="form-check-input" type="radio" value="1" name="status" id="active" checked>
+                                        <label class="form-check-label" for="active">
+                                            YES
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" value="0"  name="status" id="deactive">
+                                        <label class="form-check-label" for="deactive">
+                                            NO
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+
                             <div class="mb-3 row">
                                 <input type="submit" class="col-md-3 offset-md-5 btn btn-primary" value="Add Category">
                             </div>

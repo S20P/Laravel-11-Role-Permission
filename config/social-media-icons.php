@@ -1,0 +1,47 @@
+<?php
+
+return [
+    'icons' => [
+        'bi bi-facebook',
+        'bi bi-twitter',
+        'bi bi-instagram',
+        'bi bi-linkedin',
+        'bi bi-youtube',
+        'bi bi-whatsapp',
+        'bi bi-reddit',
+        'bi bi-pinterest',
+        'bi bi-snapchat',
+        'bi bi-tiktok',
+        'bi bi-telegram',       
+        'bi bi-slack',
+        'bi bi-discord',
+        'bi bi-medium',
+        'bi bi-github',
+        'bi bi-gitlab',       
+        'bi bi-behance',       
+        'bi bi-spotify',
+        'bi bi-twitch',
+        'bi bi-vimeo',
+        'bi bi-rss',
+        'bi bi-rss-fill',
+        'bi bi-envelope',
+        'bi bi-envelope-fill',
+        'bi bi-telephone',
+        'bi bi-telephone-fill',
+        'bi bi-share',
+        'bi bi-share-fill',
+        'bi bi-chat-dots',
+        'bi bi-chat-dots-fill',
+        'bi bi-chat-fill',
+        'bi bi-chat-left',
+        'bi bi-chat-left-dots',
+        'bi bi-chat-left-dots-fill',
+        'bi bi-chat-left-fill',
+        'bi bi-chat-right',
+        'bi bi-chat-right-dots',
+        'bi bi-chat-right-dots-fill',
+        'bi bi-chat-right-fill',              
+    ]
+    
+    
+];

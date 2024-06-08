@@ -60,7 +60,8 @@ class SettingController extends Controller
                     if(isset($setting['value'])){
                         $setting_value = $setting['value'];
                         if($setting_value){
-                            Setting::where(['key' => $setting_key])->update([                             
+                            $matchkeys = ['key' => $setting_key];
+                            Setting::updateOrCreate($matchkeys,[                             
                                 'key' => $setting_key,
                                 'value' => $setting_value,                           
                             ]);
@@ -112,4 +113,46 @@ class SettingController extends Controller
     {
        
     }
+
+    public function updateThroughAjax($input){
+          try{
+
+            $key = $input['key'];
+            $value = $input['value'];
+
+            $setting = Setting::where('key',$key)->first();
+            if(!Empty($setting))
+            {
+                $setting->value = $value;
+                $setting->save();
+            }
+     
+            
+            return response()->json([
+                'success'  => 'Data Saved Successfully.'
+            ]);
+
+          }catch(\Exception $e){
+            $errors = $e->getMessage();
+            return response()->json([
+                'error'  => $errors
+               ]);
+          }
+    }
+
+    public function ajaxRequestData(Request $request)
+    {
+        if($request->ajax()){
+                   $action = $request->action;
+                   if($action){
+                     switch($action){
+                         case "update-setting-through-key";
+                             return $this->updateThroughAjax($request->all());
+                         break;
+                        
+                     }
+                  }              
+         }    
+    }
+    
 }

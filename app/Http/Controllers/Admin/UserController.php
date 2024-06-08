@@ -35,7 +35,7 @@ class UserController extends Controller
     public function index(): View
     {
         return view('admin.users.index', [
-            'users' => Admin::latest('id')->paginate(3)
+            'users' => Admin::latest('id')->paginate(10)
         ]);
     }
 

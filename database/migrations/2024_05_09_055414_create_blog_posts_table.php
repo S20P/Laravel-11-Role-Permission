@@ -23,6 +23,7 @@ return new class extends Migration
             $table->boolean('status')->default(true);            
             $table->string('author_name')->nullable();  
             $table->unsignedBigInteger('user_id')->nullable();  
+            $table->unsignedBigInteger('views')->default(0);
             $table->timestamps();
         });
     }

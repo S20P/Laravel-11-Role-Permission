@@ -15,18 +15,18 @@ class CategorySeeder extends Seeder
     {
         $categories = [
             [
-                "name" => "Latest Blog", "description" => "Latest Blog"
+                "name" => "Latest Blog", "slug" => "latest-blog", "description" => "Latest Blog"
             ],
             [
-                "name" => "Trending Blog", "description" => "Trending Blog"
+                "name" => "Trending Blog", "slug" => "trending-blog", "description" => "Trending Blog"
             ],
             [
-                "name" => "Oldest Blog", "description" => "Oldest Blog"
+                "name" => "Oldest Blog", "slug" => "oldest-blog", "description" => "Oldest Blog"
             ]          
          ];
 
          foreach ($categories as $category) {
-            Category::create(['name' => $category['name'],'description' => $category['description'] ]);
+            Category::create(['name' => $category['name'], 'slug' => $category['slug'],'description' => $category['description'] ]);
           }
 
     }

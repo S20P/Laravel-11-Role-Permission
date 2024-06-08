@@ -82,12 +82,7 @@
                               <span>Manage Category</span>
                            </a>
                     </li> 
-                    <li class="sidebar-item">
-                     <a href="{{ route('admin.settings.index') }}" class='sidebar-link'>
-                        <i class="bi bi-gear"></i>
-                        <span>Manage Settings</span>
-                     </a>
-                   </li> 
+                
                     
                @elseif($user->hasRole(['category-manager', 'admin','blog-manager']))
                         <li class="sidebar-item">
@@ -108,14 +103,40 @@
                </li> 
                @endif
 
-               @if($user->hasRole(['admin','setting-manager']))
-               <li class="sidebar-item">
+               @if($user->hasRole(['super-admin','admin','setting-manager']))
+                  <li class="sidebar-item  has-sub">
                      <a href="{{ route('admin.settings.index') }}" class='sidebar-link'>
                         <i class="bi bi-gear"></i>
-                        <span>Manage Settings</span>
+                        <span>Settings</span>
                      </a>
-                   </li> 
+                     
+                     <ul class="submenu">
+                        <li class="submenu-item">
+                           <a href="{{ route('admin.settings.index') }}" class="submenu-link">General</a>
+                        </li>
+
+                        <li class="submenu-item">
+                           <a href="{{ route('admin.sm-settings.index') }}" class="submenu-link">
+                              <span>Social Media Links</span>
+                           </a>
+                        </li> 
+
+                     </ul>
+                  </li>
                @endif
+
+               
+
+
+               <li class="sidebar-item">
+                  <a href="{{ route('admin.comments.index') }}" class='sidebar-link'>
+                     <i class="bi bi-newspaper"></i>
+                     <span>Manage Comments</span>
+                  </a>
+               </li> 
+
+
+          
 
             {{-- @haspermission('list-category','admin')
                <h1>list-category</h1>

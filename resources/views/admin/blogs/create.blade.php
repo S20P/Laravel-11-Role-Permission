@@ -143,7 +143,7 @@
                                     </label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" value="Draft" value="true" name="status" id="deactive">
+                                    <input class="form-check-input" type="radio" value="Draft" name="status" id="deactive">
                                     <label class="form-check-label" for="deactive">
                                         Draft
                                     </label>

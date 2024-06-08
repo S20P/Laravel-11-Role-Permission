@@ -132,161 +132,123 @@
           </div>
       </div>
   
-      <div class="mt-4 border-bottom pb-5">
+      {{-- <div class="mt-4 border-bottom pb-5">
           <ul class="list-group list-group-horizontal justify-content-center">
             <li class="list-group-item rounded-0 "><a href="#" class="text-black"><i class="ti-angle-left mr-3"></i>Previous</a></li>
             <li class="list-group-item rounded-0"><a href="#" class="text-black">Next <i class="ti-angle-right ml-3"></i></a></li>
           </ul>
-      </div>
-  
+      </div> --}}
+      @if(isset($blog->comments) && count($blog->comments) > 0)  
       <div class="mt-5 border-bottom pb-5">
-          <h4 class="mb-2 font-secondary text-uppercase font-weight-normal mb-4">comments</h4>
-          <div class="media">
-            <img src="images/blog/post-1.jpg" class="mr-4 img-fluid" alt="...">
-            <div class="media-body">
-              <h4 class="mt-0 mb-0">Zander Rohan</h4>
-              <span>15 january 2019 At 10:30 pm</span>
-              <p class="mt-2">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.</p>
-  
-              <span><a href="#" class="btn reply-btn">Reply</a></span>
-  
-              <div class="media mt-5">
-                <a class="mr-3" href="#">
-                   <img src="images/blog/post-2.jpg" class="mr-4 img-fluid" alt="...">
-                </a>
-                <div class="media-body">
-                 <h4 class="mt-0 mb-0">Moris hnery</h4>
-                  <span>15 january 2019 At 10:30 pm</span>
-                  <p class="mt-2">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.</p>
-  
-                  <span><a href="#" class="btn reply-btn">Reply</a></span>
-                </div>
-              </div>
-            </div>
-          </div>
-  
-          <div class="media mt-5">
-            <img src="images/blog/post-1.jpg" class="mr-4 img-fluid" alt="...">
-            <div class="media-body">
-              <h4 class="mt-0 mb-0">Gyle hank</h4>
-              <span>15 january 2019 At 10:30 pm</span>
-              <p class="mt-2">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.</p>
-  
-              <span><a href="#" class="btn reply-btn">Reply</a></span>
-            </div>
-          </div>
+      <h4 class="mb-2 font-secondary text-uppercase font-weight-normal mb-4">comments</h4>
+           @include("pages.blogs.commentsDisplay",['comments' => $blog->comments, 'blog_id' => $blog->id])
       </div>
-  
-  
+      @endif
+
+      @if ($message = Session::get('success'))
+            <div class="alert alert-success text-center" role="alert">
+                {{ $message }}
+            </div>
+      @endif
+
       <div class="mt-4 py-4 text-center comments">
           <h4 class="mb-2 font-secondary text-uppercase font-weight-normal">Leave a reaply</h4>
           <p class="mb-5">Your email address will not be published.</p>
   
-          <form action="#" class="text-left">
-              <div class="form-row">
-                  <div class="col ">
+          <form method="post" action="{{ route('comments.store') }}" id="commentFrom" class="text-left">
+             @csrf
+              <input type="hidden" name="blog_id" value="{{ $blog->id }}" />
+               <div class="form-row">
+                  <div class="col">
                       <div class="form-group">
-                          <input type="text" name="name" class="form-control" placeholder="Your name">
+                          <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" placeholder="Your name">
+                          @if ($errors->has('name'))
+                            <span class="text-danger">{{ $errors->first('name') }}</span>
+                          @endif
                       </div>
                   </div>
                   <div class="col">
                       <div class="form-group">
-                          <input type="text" name="email" class="form-control" placeholder="Your email">
+                          <input type="text" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="Your email">
+                          @if ($errors->has('email'))
+                          <span class="text-danger">{{ $errors->first('email') }}</span>
+                        @endif
                       </div>
                   </div>
               </div>
               
               <div class="form-group text-center">
-                  <textarea name="msg" id="msg" cols="30" rows="6" class="form-control" placeholder="Your Comment"></textarea>
-  
+                  <textarea name="comment" id="comment" cols="30" rows="6" class="form-control @error('comment') is-invalid @enderror" placeholder="Your Comment"></textarea>
+                  @if ($errors->has('comment'))
+                  <span class="text-danger">{{ $errors->first('comment') }}</span>
+                  @endif
+{{--   
                   <div class="form-check mt-3">
                     <input class="form-check-input" type="checkbox" id="gridCheck">
                     <label class="form-check-label" for="gridCheck">
                       Save my name, email, and website in this browser for the next time I comment.
                     </label>
-                  </div>
-  
-                  <a href="#" class="btn btn-main mt-4">Add Comment</a>
+                  </div>   --}}
+                  <button type="submit" class="btn btn-main mt-4">Add Comment</button> 
               </div>
           </form>
       </div>
   </div>
-  
-  
-  
+ 
   
                   </div>
               </div>
-              <div class="col-lg-3 col-md-8">
-                  <div class="card border-0 rounded-0 mb-5">
-      <form action="#" class="search position-relative">
-          <input type="text" placeholder="Search" class="form-control">
-          <i class="ti-search"></i>
-      </form>
-  </div>
+ <div class="col-lg-3 col-md-8">
+    {{-- <div class="card border-0 rounded-0 mb-5">
+        <form action="#" class="search position-relative">
+            <input type="text" placeholder="Search" class="form-control">
+            <i class="ti-search"></i>
+        </form>
+    </div> --}}
   
-  <div class="mb-5 follow">
+  {{-- <div class="mb-5 follow">
       <h5 class="font-secondary mb-4"><i class="ti-minus mr-2 text-color"></i>Follow us</h5>
-  
       <a href="#" class="text-muted"><i class="ti-facebook"></i></a>
       <a href="#" class="text-muted"><i class="ti-twitter"></i></a>
       <a href="#" class="text-muted"><i class="ti-linkedin"></i></a>
       <a href="#" class="text-muted"><i class="ti-pinterest"></i></a>
       <a href="#" class="text-muted"><i class="ti-dribbble"></i></a>
-  </div>
-  
-  
+  </div> --}}
+
+  @if(isset($g_common_settings) && isset($g_common_settings['social_media_enabled']) && $g_common_settings['social_media_enabled']=="active")
+  @include("pages.blogs.sidebar.SocialMediaLinks")
+  @endif
+
   <div class="mb-5">
-      <h5 class="font-secondary mb-4"><i class="ti-minus mr-2 text-color"></i>Popular posts</h5>
-  
-      <div class="media mb-4">
-        <img src="images/blog/blog-post-5.jpg" alt="" class="img-fluid pr-4 w-50 align-self-center">
-        <div class="media-body">
-          <a href="#" class="text-black d-block lh-25"> Track your daily body fitness</a>
-        </div>
-      </div>
-  
-      <div class="media mb-4">
-        <img src="images/blog/blog-post-6.jpg" alt="" class="img-fluid pr-4 w-50 align-self-center">
-        <div class="media-body">
-          <a href="#" class="text-black d-block lh-25">Keep your body fitness track</a>
-        </div>
-      </div>
-  
-      <div class="media mb-4">
-        <img src="images/blog/post1.jpg" alt="" class="img-fluid pr-4 w-50 align-self-center">
-        <div class="media-body">
-          <a href="#" class="text-black d-block lh-25">Keep your body fitness track</a>
-        </div>
-      </div>
+      <h5 class="font-secondary mb-4"><i class="ti-minus mr-2 text-color"></i>Related blogs</h5>
+      @include("pages.blogs.sidebar.RelatedBlog",['relatedBlogs' => $relatedBlogs])
   </div>
-  
-  
+
+  <div class="mb-5">
+    <h5 class="font-secondary mb-4"><i class="ti-minus mr-2 text-color"></i>Top Trending blogs</h5>
+    @include("pages.blogs.sidebar.TrendingBlog",['trendingBlogs' => $trendingBlogs])
+  </div>
+    
   <div class="mb-5 categories">
       <h5 class="font-secondary mb-4"><i class="ti-minus mr-2 text-color"></i>Categories</h5>
-      
-      <ul class="list-group">
-        @foreach ($blog->categories as $category)
-         <li class="list-group-item d-flex justify-content-between align-items-center rounded-0 border-0">
-          <a href="#" class="text-muted">{{ $category->name }}</a>
-         <span class="badge bg-primary badge-pill text-white border-0">14</span>
-       </li>
-        @endforeach        
-      </ul>
+      @include("pages.blogs.sidebar.Categories",['categories' => $categories])
+  </div>
+
+  <div class="mb-5">
+    @include("pages.blogs.sidebar.Block")    
   </div>
   
-  <div class="mb-5 tags">
-      <h5 class="font-secondary mb-4"><i class="ti-minus mr-2 text-color"></i>Tags</h5>
-  
-      <a href="#">body</a>
-      <a href="#">fitness</a>
-      <a href="#">health</a>
-      <a href="#">diet</a>
-      <a href="#">plan</a>
-      <a href="#">gym</a>
-      <a href="#">trainer</a>
-      <a href="#">tutorials</a>
-  </div>
+                <div class="mb-5 tags">
+                    <h5 class="font-secondary mb-4"><i class="ti-minus mr-2 text-color"></i>Tags</h5>
+                    <a href="#">body</a>
+                    <a href="#">fitness</a>
+                    <a href="#">health</a>
+                    <a href="#">diet</a>
+                    <a href="#">plan</a>
+                    <a href="#">gym</a>
+                    <a href="#">trainer</a>
+                    <a href="#">tutorials</a>
+                </div>
   
               </div>
           </div>
@@ -304,3 +266,8 @@
   @endif
   @endsection
   <!-- Dynamic Block setting section :: END -->
+
+  @push('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+    <script src="{{ asset('js/blog.js') }}"></script>
+  @endpush

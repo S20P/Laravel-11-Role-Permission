@@ -34,7 +34,11 @@ class PermissionSeeder extends Seeder
             'list-setting',
             'create-setting',
             'edit-setting',
-            'delete-setting',         
+            'delete-setting',          
+            'list-comment',
+            'create-comment',
+            'edit-comment',
+            'delete-comment',         
          ];
 
          foreach ($permissions as $permission) {

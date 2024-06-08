@@ -31,7 +31,7 @@ class BlogPostController extends Controller
     {
         // $posts = BlogPost::with('categories')->get();
         return view('admin.blogs.index', [
-            'blogs' => BlogPost::latest()->paginate(6)
+            'blogs' => BlogPost::latest()->paginate(10)
         ]);
     }
 
@@ -233,7 +233,7 @@ class BlogPostController extends Controller
 
         }catch(\Exception $e){
             $errors = $e->getMessage();
-            dd($errors);
+           
             return redirect()->route('admin.blogs.index')
             ->withErrors($errors);
         }
@@ -247,6 +247,9 @@ class BlogPostController extends Controller
         $blog = BlogPost::find($id); 
         $blog->categories()->detach();
         $blog->settings()->detach();
+        $blog->comments()->delete();
+        $blog->metaInfos()->delete();
+
         $blog->delete();
 
         return redirect()->route('admin.blogs.index')

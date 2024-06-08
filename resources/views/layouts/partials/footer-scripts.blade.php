@@ -32,7 +32,7 @@
    @stack('scripts')
 
 <!-- base_setting_footer --> 
-@if(isset($common_settings) && isset($common_settings['footer']))
-      {!! $common_settings['footer'] !!}
+@if(isset($g_common_settings) && isset($g_common_settings['footer']))
+      {!! $g_common_settings['footer'] !!}
 @endif
 <!-- base_setting_footer  :: END--> 

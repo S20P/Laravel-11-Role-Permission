@@ -32,9 +32,13 @@
                     <thead>
                         <tr>
                         <th scope="col">S#</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Description</th>
-                        <th scope="col">Action</th>
+                        <th scope="col">NAME</th>
+                        <th scope="col">SLUG</th>
+                        <th scope="col">DESCRIPTION</th>
+                        <th scope="col">SHOW ON MENU</th>
+                        <th scope="col">MENU SORT ORDER</th>
+                        <th scope="col">STATUS</th>
+                        <th scope="col">ACTION</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -42,7 +46,17 @@
                         <tr>
                             <th scope="row">{{ $loop->iteration }}</th>
                             <td>{{ $category->name }}</td>
+                            <td>{{ $category->slug }}</td>
                             <td>{{ $category->description }}</td>
+                            <td>{{ $category->is_show_on_menu ? "YES" : "NO" }}</td>
+                            <td>{{ $category->menu_sort }}</td>
+                            <td>
+                                @if($category->status==1)
+                                   <span class="badge bg-success">Active</span> 
+                                @else
+                                  <span class="badge bg-danger">Inactive</span>
+                                @endif
+                            </td>
                             <td>
                                 <form action="{{ route('admin.categories.destroy', $category->id) }}" method="post">
                                     @csrf

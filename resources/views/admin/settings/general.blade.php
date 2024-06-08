@@ -1,6 +1,14 @@
 @extends('admin.layouts.app')
 
 @section('content')
+
+@push('styles')
+<!-- include libraries(jQuery, bootstrap) -->
+ <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+ <link rel="stylesheet" href="{{asset('Admin/assets/extensions/summernote/summernote-lite.css')}}">
+ <link rel="stylesheet" href="{{asset('Admin/assets/compiled/css/form-editor-summernote.css')}}"> 
+@endpush
+
 <div class="page-heading">
     <div class="page-title">
         <div class="row">
@@ -49,7 +57,13 @@
                                 <label for="title" class="col-form-label">Block</label>
                                 <input type="hidden" name="settings_info[2][key]" value="block"> 
                                 <textarea class="form-control" rows="15" cols="200" id="block" name="settings_info[2][value]">{{ $settings_info['block']??old('settings_info[2][value]') }}</textarea>                               
-                            </div>        
+                            </div>   
+                            
+                            <div class="form-group field mb-3">
+                                <label for="title" class="col-form-label">Sidebar Block</label>
+                                <input type="hidden" name="settings_info[3][key]" value="blog_sidebar_block"> 
+                                <textarea class="form-control" rows="15" cols="200" id="blog_sidebar_block" name="settings_info[3][value]">{{ $settings_info['blog_sidebar_block']??old('settings_info[3][value]') }}</textarea>                               
+                            </div>   
                             
                             <div class="col-12 d-flex justify-content-end">
                                 <button type="submit" class="btn btn-primary me-1 mb-1">Save</button>                                
@@ -62,4 +76,28 @@
         </div>
     </section>
 </div>
+@push('scripts')  
+<!-- include summernote css/js -->
+ <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+ <script src="{{asset('Admin/assets/extensions/summernote/summernote-lite.min.js')}}"></script>
+ <script src="{{asset('Admin/assets/static/js/pages/summernote.js')}}"></script> 
+ <script>
+    $(document).ready(function() {
+       $('#blog_sidebar_block').summernote({
+        placeholder: 'Blog Sidebar content body',
+        tabsize: 2,
+        height: 250,
+        toolbar: [
+          ['style', ['style']],
+          ['font', ['bold', 'underline', 'clear']],
+          ['color', ['color']],
+          ['para', ['ul', 'ol', 'paragraph']],
+          ['table', ['table']],
+          ['insert', ['link', 'picture', 'video']],
+          ['view', ['fullscreen', 'codeview', 'help']]
+        ]
+       });
+    });
+</script>
+@endpush
 @endsection
