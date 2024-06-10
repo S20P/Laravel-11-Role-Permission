@@ -60,7 +60,7 @@ class BlogController extends Controller
        
         try{
             $mainCategory = Category::where('slug', $slug)->where('status',1)->first();
-            if(!Empty($blog)){
+            if(!Empty($mainCategory)){
                 $blogs = BlogPost::whereHas('categories', function($query) use ($slug) {
                     $query->where('slug', $slug);
                 })->paginate(10);        
@@ -74,7 +74,7 @@ class BlogController extends Controller
           }
         }catch(\Exception $e){               
                 $errors = $e->getMessage();
-                dd($errors);
+                abort(404);
                 return redirect()->back()
                 ->withErrors($errors);
       }

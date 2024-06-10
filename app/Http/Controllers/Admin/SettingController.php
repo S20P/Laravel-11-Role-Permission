@@ -76,7 +76,6 @@ class SettingController extends Controller
 
         }catch(\Exception $e){
             $errors = $e->getMessage();
-            dd($errors);
             return redirect()->route('admin.settings.index')
             ->withErrors($errors);
         }

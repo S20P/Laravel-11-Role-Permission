@@ -13,6 +13,10 @@ use App\Http\Controllers\Admin\BlogPostController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\CommentController as AdminCommentController;
 use App\Http\Controllers\Admin\SocialMediaSettingController as SMSettingController;
+use App\Http\Controllers\Admin\AdInserterController as AdInserter;
+
+
+
 
 
 
@@ -108,6 +112,15 @@ Route::group(['prefix' => 'admin', 'as'=>'admin.'],function(){
     Route::get('sm-settings/{id}', [SMSettingController::class, 'show'])->name('sm-settings.show');
     Route::put('sm-settings/{id}', [SMSettingController::class, 'update'])->name('sm-settings.update');
     Route::delete('sm-settings/{id}', [SMSettingController::class, 'destroy'])->name('sm-settings.destroy');
+    
+    Route::get('/ad-inserter-settings', [AdInserter::class, 'index'])->name('ad-inserter-settings.index');
+    Route::POST('/ad-inserter-settings-ajax', [AdInserter::class, 'ajaxRequestData'])->name('ad-inserter-settings.ajax');
+    Route::get('ad-inserter-settings/create', [AdInserter::class, 'create'])->name('ad-inserter-settings.create');
+    Route::post('ad-inserter-settings', [AdInserter::class, 'store'])->name('ad-inserter-settings.store');
+    Route::get('ad-inserter-settings/{id}/edit', [AdInserter::class, 'edit'])->name('ad-inserter-settings.edit');
+    Route::get('ad-inserter-settings/{id}', [AdInserter::class, 'show'])->name('ad-inserter-settings.show');
+    Route::put('ad-inserter-settings/{id}', [AdInserter::class, 'update'])->name('ad-inserter-settings.update');
+    Route::delete('ad-inserter-settings/{id}', [AdInserter::class, 'destroy'])->name('ad-inserter-settings.destroy');
 
   });
 

@@ -14,17 +14,19 @@ return new class extends Migration
         Schema::create('ad_inserter_settings', function (Blueprint $table) {
             $table->id();
             $table->string('key')->unique()->index();
-            $table->longText('value');   
+            $table->longText('value')->nullable(); 
             
+            $table->string('page_type')->nullable();
+
             // ENUM
-            $table->enum('page_type', [
-                'post', 
-                'home_page', 
-                'category_page', 
-                'static_page', 
-                'search_page', 
-                'tag_archive_page'
-            ])->index();
+            // $table->enum('page_type', [
+            //     'post', 
+            //     'home_page', 
+            //     'category_page', 
+            //     'static_page', 
+            //     'search_page', 
+            //     'tag_archive_page'
+            // ])->index();
 
             $table->enum('position', [
                 'before_post', 
@@ -44,14 +46,16 @@ return new class extends Migration
 
            
             $table->enum('alignment',[
-                'Left', 
-                'Center', 
-                'Right', 
-                'Float left', 
-                'Float right', 
-                'No wrapping', 
-                'Custom CSS'
+                'left', 
+                'center', 
+                'right', 
+                'float-left', 
+                'float-right', 
+                'no-wrapping', 
+                'custom-css'
             ])->default('Left');
+
+            $table->longText('css')->nullable();
 
             $table->boolean('status')->default(true);  
             $table->timestamps();

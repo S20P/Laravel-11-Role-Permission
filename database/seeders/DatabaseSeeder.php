@@ -28,7 +28,8 @@ class DatabaseSeeder extends Seeder
             SuperAdminSeeder::class,
             CategorySeeder::class,
             SettingSeeder::class,
-            SocialMediaSettingSeeder::class
+            SocialMediaSettingSeeder::class,
+            AdInserterSettingSeeder::class
         ]);
 
 

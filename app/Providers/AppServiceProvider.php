@@ -28,7 +28,7 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->singleton('g_category_menus', function () {
             return Category::select('name','slug')->where('is_show_on_menu',1)->where('status',1)->orderBy('menu_sort')->get()->toArray();
-        });
+        });      
 
     } 
 
@@ -48,6 +48,7 @@ class AppServiceProvider extends ServiceProvider
 
             $g_category_menus = app('g_category_menus');
             $view->with(["g_category_menus"=>$g_category_menus]);
+           
         });
         
     }

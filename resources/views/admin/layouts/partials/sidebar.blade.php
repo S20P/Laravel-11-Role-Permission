@@ -121,6 +121,12 @@
                            </a>
                         </li> 
 
+                        <li class="submenu-item">
+                           <a href="{{ route('admin.ad-inserter-settings.index') }}" class="submenu-link">
+                              <span>Ad Inserter</span>
+                           </a>
+                        </li> 
+
                      </ul>
                   </li>
                @endif

@@ -24,4 +24,13 @@ return [
         'between_comments', 
         'after_comments'
     ],
+    'alignment' => [
+        'left', 
+        'center', 
+        'right', 
+        'float-left', 
+        'float-right', 
+        'no-wrapping', 
+        'custom-css'
+    ]
 ];

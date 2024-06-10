@@ -805,4 +805,29 @@ ul.dropdown-menu li {
 
 
 
+/* Ad Inserter CSS */
+.ad_inserter_align_left{
+  text-align: left;
+}
+
+.ad_inserter_align_center{
+  text-align: center;
+}
+
+.ad_inserter_align_right{
+  text-align: right;
+  
+}
+
+.ad_inserter_align_float-left{
+  float: left;
+}
+
+.ad_inserter_align_float-right{
+  float: right;
+}
+
+.ad_inserter_align_no-wrapping{
+  white-space: nowrap;
+}
 

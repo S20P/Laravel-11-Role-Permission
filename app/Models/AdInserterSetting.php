@@ -17,7 +17,18 @@ class AdInserterSetting extends Model
               'page_type',
               'position',
               'alignment',
+              'css',
               'status'
+    ];   
 
-    ];
+    
+    public static function ad_inserter_inject($pageType,$position)
+    {
+        return self::select('key','value','page_type','position','alignment')
+        ->where('status',1)
+        ->where('page_type', 'LIKE', '%' . $pageType . '%')
+        ->where("position",$position)->get();
+    }
+
+
 }

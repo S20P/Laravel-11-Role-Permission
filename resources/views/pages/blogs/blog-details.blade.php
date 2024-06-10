@@ -43,7 +43,7 @@
       <div class="row">
         <div class="col-lg-12 text-center">
             <ul class="list-inline mb-0">
-              <li class="list-inline-item"><a href="index.html" class="text-sm letter-spacing text-white text-uppercase font-weight-bold">Home</a></li>
+              <li class="list-inline-item"><a href="{{url('/')}}" class="text-sm letter-spacing text-white text-uppercase font-weight-bold">Home</a></li>
               <li class="list-inline-item"><span class="text-white">|</span></li>
               <li class="list-inline-item"><a href="#" class="text-color text-uppercase text-sm letter-spacing">blog single</a></li>
             </ul>
@@ -53,6 +53,7 @@
     </div>
   </section>
   
+  @include("pages.ad-inserter.block",['pageTypeParam' => "post", "position"=>'before_post'])
   
   <!-- Section Blog start -->
   <section class="section blog bg-gray">
@@ -61,7 +62,9 @@
               <div class="col-lg-9 col-md-12">
                   <div class="row">
                       <div class="col-lg-12">
-      <img src="{{ asset('uploads/blogs/'.$blog->image) }}" alt="" class="img-fluid">
+        @include("pages.ad-inserter.block",['pageTypeParam' =>"post", "position"=>'before_image'])
+          <img src="{{ asset('uploads/blogs/'.$blog->image) }}" alt="" class="img-fluid">
+      @include("pages.ad-inserter.block",['pageTypeParam' =>"post", "position"=>'after_image'])
       <div> {!! $blog->body !!} </div>
 {{--   
       <blockquote class="blockquote p-4 bg-white text-black font-italic my-5">
@@ -138,18 +141,25 @@
             <li class="list-group-item rounded-0"><a href="#" class="text-black">Next <i class="ti-angle-right ml-3"></i></a></li>
           </ul>
       </div> --}}
+
+      @include("pages.ad-inserter.block",['pageTypeParam' =>"post", "position"=>'before_comments'])
+
       @if(isset($blog->comments) && count($blog->comments) > 0)  
       <div class="mt-5 border-bottom pb-5">
       <h4 class="mb-2 font-secondary text-uppercase font-weight-normal mb-4">comments</h4>
            @include("pages.blogs.commentsDisplay",['comments' => $blog->comments, 'blog_id' => $blog->id])
       </div>
       @endif
+      
+      @include("pages.ad-inserter.block",['pageTypeParam' =>"post", "position"=>'between_comments'])
 
       @if ($message = Session::get('success'))
             <div class="alert alert-success text-center" role="alert">
                 {{ $message }}
             </div>
       @endif
+
+     
 
       <div class="mt-4 py-4 text-center comments">
           <h4 class="mb-2 font-secondary text-uppercase font-weight-normal">Leave a reaply</h4>
@@ -193,6 +203,9 @@
               </div>
           </form>
       </div>
+
+      @include("pages.ad-inserter.block",['pageTypeParam' =>"post", "position"=>'after_comments'])
+
   </div>
  
   
@@ -264,8 +277,18 @@
             {!! $block_setting['value'] !!}
      @endif
   @endif
+
+  @include("pages.ad-inserter.block",['pageTypeParam' =>"post", "position"=>'after_post'])
+        @push('ad_before_footer')
+        @include("pages.ad-inserter.block",['pageTypeParam' =>"post", "position"=>'before_footer'])
+        @endpush
+        @push('ad_after_footer')
+        @include("pages.ad-inserter.block",['pageTypeParam' =>"post", "position"=>'after_footer'])
+        @endpush
+        
   @endsection
   <!-- Dynamic Block setting section :: END -->
+
 
   @push('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>

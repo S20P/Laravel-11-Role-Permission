@@ -22,7 +22,7 @@
 	</div>
 </section>
 <!-- Section Slider End -->
-
+@include("pages.ad-inserter.block",['pageTypeParam' => "home_page", "position"=>'before_post'])
 <!-- Section Intro Start -->
 <section class="mt-80px">
 	<div class="container">
@@ -348,5 +348,11 @@
 	</div>
 </section>
 <!-- Section Course ENd -->
-
+@include("pages.ad-inserter.block",['pageTypeParam' =>"home_page", "position"=>'after_post'])
+@push('ad_before_footer')
+@include("pages.ad-inserter.block",['pageTypeParam' =>"home_page", "position"=>'before_footer'])
+@endpush
+@push('ad_after_footer')
+@include("pages.ad-inserter.block",['pageTypeParam' =>"home_page", "position"=>'after_footer'])
+@endpush
 @endsection

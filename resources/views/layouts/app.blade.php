@@ -21,7 +21,10 @@
             <div id="main-content">
                  @yield('content')
             </div>
+
+            @stack('ad_before_footer')
             @include('layouts.partials.footer')
+            @stack('ad_after_footer')
            
          </div>
       </div>

@@ -21,7 +21,7 @@
     </div>
   </section>
 
-
+  @include("pages.ad-inserter.block",['pageTypeParam' => "category_page", "position"=>'before_post'])
   <!-- Section Blog start -->
   <section class="section blog bg-gray">
     <div class="row justify-content-center">
@@ -40,7 +40,13 @@
       </div>
   </section>
   <!-- Section Blog End -->
-  
+  @include("pages.ad-inserter.block",['pageTypeParam' => "category_page", "position"=>'after_post'])
+  @push('ad_before_footer')
+  @include("pages.ad-inserter.block",['pageTypeParam' =>"category_page", "position"=>'before_footer'])
+  @endpush
+  @push('ad_after_footer')
+  @include("pages.ad-inserter.block",['pageTypeParam' =>"category_page", "position"=>'after_footer'])
+  @endpush
 <input type="hidden" value="{{ route('blog.ajax') }}" id="blog_ajax_url">
 @endsection
 @push('scripts')

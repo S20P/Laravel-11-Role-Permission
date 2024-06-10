@@ -108,7 +108,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group mb-3">
                                         <label for="published_at">Publish At</label>
-                                        <input type="date" name="published_at"  class="form-control @error('published_at') is-invalid @enderror" {{ $blog->published_at }}>
+                                        <input type="date" name="published_at" value="{{ $blog->published_at ?  \Carbon\Carbon::parse($blog->published_at)->format('Y-m-d') : '' }}"  class="form-control @error('published_at') is-invalid @enderror">
                                         @if ($errors->has('published_at'))
                                             <span class="text-danger">{{ $errors->first('published_at') }}</span>
                                         @endif
