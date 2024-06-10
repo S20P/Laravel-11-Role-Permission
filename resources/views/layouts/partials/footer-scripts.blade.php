@@ -9,10 +9,10 @@
 
 
    <!-- Main jQuery -->
-   {{-- <script src="{{asset('plugins/jquery/jquery.js')}}"></script> --}}
+    <script src="{{asset('plugins/jquery/jquery.js')}}"></script> 
    <!-- Bootstrap 4.3.1 -->
-   {{-- <script src="{{asset('plugins/bootstrap/js/bootstrap.min.js')}}"></script> --}}
-   <script src="{{asset('bootstrap-5.0.2-dist/js/bootstrap.min.js')}}"></script> 
+    <script src="{{asset('plugins/bootstrap/js/bootstrap.min.js')}}"></script> 
+   {{-- <script src="{{asset('bootstrap-5.0.2-dist/js/bootstrap.min.js')}}"></script>  --}}
    <!-- Slick Slider -->
    <script src="{{asset('plugins/slick-carousel/slick/slick.min.js')}}"></script>
    <!--  Magnific Popup-->
