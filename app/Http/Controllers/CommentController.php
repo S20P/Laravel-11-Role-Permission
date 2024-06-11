@@ -33,6 +33,9 @@ class CommentController extends Controller
             $input = $request->all();
 
             $input['user_id'] = auth()->user()->id??0;    
+            $input['status'] = 0;
+            
+
             Comment::create($input);
             
             return redirect()->back()

@@ -48,25 +48,26 @@ class SettingController extends Controller
      */
     public function store(Request $request)
     {
-      
+     
         try{
-
               //meta tags
               if(isset($request->settings_info)){
                 $settings  = $request->settings_info;
                 if(count($settings) > 0){
                 foreach ($settings as $setting) {
                     $setting_key = $setting['key'];
-                    if(isset($setting['value'])){
+                    
                         $setting_value = $setting['value'];
-                        if($setting_value){
                             $matchkeys = ['key' => $setting_key];
+                            if($setting_value=="<p><br></p>" || $setting_value==null){
+                                $setting_value = "";
+                            }
                             Setting::updateOrCreate($matchkeys,[                             
                                 'key' => $setting_key,
                                 'value' => $setting_value,                           
                             ]);
-                        }
-                    }
+                        
+                    
                   }
                }
             }
