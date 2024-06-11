@@ -59,16 +59,22 @@ class AdInserterController extends Controller
             $alignment = $input['alignment']??[];
             $insert_data = [];
 
+          
+
             for($count = 0; $count < 100; $count++)
             {
                 if(isset($key[$count]) && isset($value_block[$count]) && isset($page_type[$count]) && isset($position[$count]) && isset($alignment[$count]))
                 {
 
                     $page_type_string = implode(',', $page_type[$count]);
+                    $setting_value = $value_block[$count];
+                    if($setting_value=="<p><br></p>" || $setting_value==null){
+                        $setting_value = "";
+                    }
 
                     $data = array(
                         'key' => $key[$count],
-                        'value' => $value_block[$count],
+                        'value' => $setting_value,
                         'page_type' => $page_type_string,
                         'position' => $position[$count],
                         'alignment' => $alignment[$count]                       

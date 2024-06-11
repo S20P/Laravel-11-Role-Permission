@@ -15,6 +15,6 @@ class Category extends Model
 
     public function blogs()
     {
-        return $this->belongsToMany(Blogs::class);
+        return $this->belongsToMany(Blogs::class)->where('status', 1);
     }
 }

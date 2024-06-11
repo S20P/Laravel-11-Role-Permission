@@ -63,7 +63,7 @@ class BlogController extends Controller
             if(!Empty($mainCategory)){
                 $blogs = BlogPost::whereHas('categories', function($query) use ($slug) {
                     $query->where('slug', $slug);
-                })->paginate(10);        
+                })->where('status', 1)->paginate(10);        
         
                 return view('pages.blogs.blog-category', [
                     'blogs' => $blogs,
@@ -87,7 +87,8 @@ class BlogController extends Controller
             $query->whereIn('categories.id', $blog->categories->pluck('id'));
         })
         ->where('id', '!=', $blog->id)
-        ->limit(5)
+        ->where('status', 1)
+        ->limit(5)       
         ->get();
          
         if ($relatedBlogs->isEmpty()) {
