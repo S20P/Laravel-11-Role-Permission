@@ -161,21 +161,38 @@ $(document).ready(function(e){
     var toc = $('#toc');
     var BlogBodyContent = $('#blog-content');
 
+    console.log("toc",toc);
+    console.log("BlogBodyContent",BlogBodyContent);
+    console.log("BlogBodyContent value",BlogBodyContent.find('h1, h2, h3, h4, h5, h6'));
     BlogBodyContent.find('h1, h2, h3, h4, h5, h6').each(function(index) {
+
+        console.log("index",index);
+
         // Get the heading text and level
         var heading = $(this);
+        console.log("heading",heading);
         var text = heading.text();
         var level = heading.prop('nodeName').toLowerCase();
+
+        console.log("text",text);
+        console.log("level",level);
 
         // Generate a unique ID for the heading
         var id = 'heading-' + index;
         heading.attr('id', id);
 
+        console.log("id",id);
+      
+
         // Create a link to the heading
         var link = $('<a></a>').attr('href', '#' + id).text(text);
 
+        console.log("link",link);
+
         // Create a list item for the TOC
         var listItem = $('<li></li>').addClass(level).append(link);
+
+        console.log("listItem",listItem);
 
         // Append the list item to the TOC
         toc.append(listItem);
