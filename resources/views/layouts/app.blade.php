@@ -7,7 +7,33 @@
         
       <!-- CSRF Token -->
       <meta name="csrf-token" content="{{ csrf_token() }}">
-      <title>{{ config('app.name', 'Laravel BLOG') }}</title>
+
+      @php
+      $meta_title = "";
+      $meta_description = "";
+      $tagline = "";
+      $site_icon = "";
+      if(isset($g_common_settings)){
+         if(isset($g_common_settings['site_title'])){
+           $meta_title =  $g_common_settings['site_title'];
+         }
+         if(isset($g_common_settings['site_description'])){
+           $meta_description =  $g_common_settings['site_description'];
+         }
+         if(isset($g_common_settings['tagline'])){
+           $tagline =  $g_common_settings['tagline'];
+         }
+         if(isset($g_common_settings['site_icon'])){
+           $site_icon = asset('uploads/'.$g_common_settings['site_icon']);
+         }
+      }  
+      
+      
+  
+      @endphp
+
+      <title>@yield('meta_title',$meta_title) {{$tagline}}</title>
+      <link rel="shortcut icon" href="{{$site_icon}}" type="image/x-icon">
 
       @include('layouts.partials.meta-tags')
       

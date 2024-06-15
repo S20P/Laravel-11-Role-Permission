@@ -19,7 +19,18 @@ class AppServiceProvider extends ServiceProvider
     {
         
         $this->app->singleton('g_base_settings', function () {
-            return Setting::whereIn('key',['header','footer','blog_sidebar_block','social_media_enabled'])->pluck('value','key')->toArray();
+            return Setting::whereIn('key',[
+                                    'header',
+                                    'footer',
+                                    'blog_sidebar_block',
+                                    'social_media_enabled',
+                                    'site_title',
+                                    'site_description',
+                                    'tagline',
+                                    'site_icon',
+                                    'blog_pagination'
+                                ])
+                            ->pluck('value','key')->toArray();
         });
 
         $this->app->singleton('g_social_media_settings', function () {

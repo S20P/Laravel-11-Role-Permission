@@ -46,13 +46,15 @@
               <li class="list-inline-item"><a href="{{url('/')}}" class="text-sm letter-spacing text-white text-uppercase font-weight-bold">Home</a></li>
               <li class="list-inline-item"><span class="text-white">|</span></li>
               <li class="list-inline-item"><a href="#" class="text-color text-uppercase text-sm letter-spacing">blog single</a></li>
-            </ul>
+            </ul>          
              <h1 class="text-lg text-white mt-2"> {{ $blog->title }}</h1>
         </div>
       </div>
     </div>
   </section>
-  
+
+
+
   @include("pages.ad-inserter.block",['pageTypeParam' => "post", "position"=>'before_post'])
   
   <!-- Section Blog start -->
@@ -65,7 +67,14 @@
         @include("pages.ad-inserter.block",['pageTypeParam' =>"post", "position"=>'before_image'])
           <img src="{{ asset('uploads/blogs/'.$blog->image) }}" alt="" class="img-fluid">
       @include("pages.ad-inserter.block",['pageTypeParam' =>"post", "position"=>'after_image'])
-      <div> {!! $blog->body !!} </div>
+
+
+      <h2>Table of Contents</h2>
+      <div id="toc-container">
+          <ul id="toc"></ul>
+      </div>
+      
+      <div id="blog-content"> {!! $blog->body !!} </div>
 {{--   
       <blockquote class="blockquote p-4 bg-white text-black font-italic my-5">
           <i class="ti-quote-left text-lg text-color mr-2"></i>Merupakan fakta bahwa seorang pembaca akan terpengaruh oleh isitue tulisan dari sebuah halaman saat ia melihat tata letaknya. Maksud penggunaan Lorem Ipsum adalah karena ia kurang lebih memiliki penyebaran huruf.

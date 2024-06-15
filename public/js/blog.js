@@ -153,4 +153,32 @@ $(document).ready(function(e){
                 });
      } 
 
+
+
+
+    //  Blog Details page js
+
+    var toc = $('#toc');
+    var BlogBodyContent = $('#blog-content');
+
+    BlogBodyContent.find('h1, h2, h3, h4, h5, h6').each(function(index) {
+        // Get the heading text and level
+        var heading = $(this);
+        var text = heading.text();
+        var level = heading.prop('nodeName').toLowerCase();
+
+        // Generate a unique ID for the heading
+        var id = 'heading-' + index;
+        heading.attr('id', id);
+
+        // Create a link to the heading
+        var link = $('<a></a>').attr('href', '#' + id).text(text);
+
+        // Create a list item for the TOC
+        var listItem = $('<li></li>').addClass(level).append(link);
+
+        // Append the list item to the TOC
+        toc.append(listItem);
+    });
+
 });

@@ -10,14 +10,19 @@ use PhpParser\Node\Expr\Empty_;
 
 class BlogController extends Controller
 {
+    public $per_page = 10;
     public function __construct(){
-
+        $g_common_settings = app('g_base_settings'); 
+        if(isset($g_common_settings) && isset($g_common_settings['blog_pagination'])){
+            $this->per_page  =  $g_common_settings['blog_pagination'];
+        }
+        
     }
 
     public function index()
     {
-      
-        $blogs = BlogPost::with("categories")->where('status',1)->latest()->paginate(10);
+       
+        $blogs = BlogPost::with("categories")->where('status',1)->latest()->paginate($this->per_page);
         
         return view('pages.blogs.blog', [
             'blogs' => $blogs
@@ -27,6 +32,7 @@ class BlogController extends Controller
     public function show($slug)
     {
         $blog = BlogPost::with(["categories","metaInfos","settings","comments","latestComment","oldestComment"])->where("slug",$slug)->where('status',1)->first(); 
+     
         if(!Empty($blog)){
             $viewedBlogPosts = Session::get('viewed_blog_posts', []);
             if (!in_array($blog->id, $viewedBlogPosts)) {
@@ -40,7 +46,7 @@ class BlogController extends Controller
             $relatedBlogs = $this->getRelatedBlogs($blog);
             $trendingBlogs = BlogPost::orderBy('views', 'desc')->limit(5)->get();
     
-            $categories = Category::all();
+            $categories = Category::withCount('blogs')->get();
             return view('pages.blogs.blog-details', [
                 'blog' => $blog,
                 'meta_info' => $blog->metaInfos??[],
@@ -63,7 +69,7 @@ class BlogController extends Controller
             if(!Empty($mainCategory)){
                 $blogs = BlogPost::whereHas('categories', function($query) use ($slug) {
                     $query->where('slug', $slug);
-                })->where('status', 1)->paginate(10);        
+                })->where('status', 1)->paginate($this->per_page);        
         
                 return view('pages.blogs.blog-category', [
                     'blogs' => $blogs,
@@ -130,7 +136,7 @@ class BlogController extends Controller
             $blogs->orWhere('body', 'LIKE', "%{$search}%");
         }
 
-        $blogs = $blogs->latest()->paginate(10);
+        $blogs = $blogs->latest()->paginate($this->per_page);
         
         $blogItemHTML = view('pages.blogs.blog-items', [
             'blogs' => $blogs

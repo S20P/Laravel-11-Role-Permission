@@ -24,7 +24,22 @@ class SettingSeeder extends Seeder
             ],
             [
                 "key" => "social_media_enabled", "value" => "active"
-            ]                      
+            ],
+            [
+                "key" => "site_title", "value" => "horoscope 7 day"
+            ],
+            [
+                "key" => "site_description", "value" => "horoscope 7 day"
+            ],
+            [
+                "key" => "tagline", "value" => "horoscope 7 day"
+            ],
+            [
+                "key" => "site_icon	", "value" => ""
+            ],  
+            [
+                "key" => "blog_pagination", "value" => "10"
+            ]                     
          ];
 
          foreach ($settings as $setting) {

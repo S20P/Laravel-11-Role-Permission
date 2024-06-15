@@ -8,6 +8,7 @@ use App\Models\Setting;
 use App\Http\Requests\StoreSettingRequest;
 use App\Http\Requests\UpdateSettingRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\UploadedFile;
 class SettingController extends Controller
 {
     public function __construct()
@@ -62,6 +63,17 @@ class SettingController extends Controller
                             if($setting_value=="<p><br></p>" || $setting_value==null){
                                 $setting_value = "";
                             }
+
+
+                            if($setting_value instanceof UploadedFile && $setting_value->isValid())
+                            {
+                                    $icon_file =$setting_value;                                    
+                                    $filename = "meta".time() . '.' .  $icon_file->getClientOriginalExtension();
+                                    $imageStorePath = public_path('uploads/');
+                                    $icon_file->move($imageStorePath, $filename);
+                                    $setting_value = $filename;
+                            }  
+
                             Setting::updateOrCreate($matchkeys,[                             
                                 'key' => $setting_key,
                                 'value' => $setting_value,                           

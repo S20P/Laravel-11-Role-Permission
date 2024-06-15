@@ -1,6 +1,7 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"  crossorigin="anonymous"></script> 
+
 {{-- <script src="{{asset('bootstrap-5.0.2-dist/js/bootstrap.min.js')}}"></script> --}}
 
  <!-- 
@@ -9,7 +10,7 @@
 
 
    <!-- Main jQuery -->
-    <script src="{{asset('plugins/jquery/jquery.js')}}"></script> 
+    {{-- <script src="{{asset('plugins/jquery/jquery.js')}}"></script>  --}}
    <!-- Bootstrap 4.3.1 -->
     <script src="{{asset('plugins/bootstrap/js/bootstrap.min.js')}}"></script> 
    {{-- <script src="{{asset('bootstrap-5.0.2-dist/js/bootstrap.min.js')}}"></script>  --}}

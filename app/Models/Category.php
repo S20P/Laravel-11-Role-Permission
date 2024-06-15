@@ -17,4 +17,5 @@ class Category extends Model
     {
         return $this->belongsToMany(Blogs::class)->where('status', 1);
     }
+    
 }

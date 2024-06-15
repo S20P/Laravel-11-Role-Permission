@@ -832,3 +832,6 @@ ul.dropdown-menu li {
   white-space: nowrap;
 }
 
+#toc li{
+  font-size: 17px!important;
+}

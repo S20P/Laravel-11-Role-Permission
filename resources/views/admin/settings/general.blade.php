@@ -38,7 +38,7 @@
                         
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('admin.settings.store') }}" method="post">
+                        <form action="{{ route('admin.settings.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
 
                             <div class="form-group field mb-3">
@@ -63,7 +63,40 @@
                                 <label for="title" class="col-form-label">Sidebar Block</label>
                                 <input type="hidden" name="settings_info[3][key]" value="blog_sidebar_block"> 
                                 <textarea class="form-control" rows="15" cols="200" id="blog_sidebar_block" name="settings_info[3][value]">{{ $settings_info['blog_sidebar_block']??old('settings_info[3][value]') }}</textarea>                               
-                            </div>   
+                            </div>  
+                            
+                            <div class="form-group field mb-3">
+                                <label for="site_title" class="col-form-label">Site Title</label>
+                                <input type="hidden" name="settings_info[4][key]" value="site_title"> 
+                                <input type="text" class="form-control" id="site_title" name="settings_info[4][value]" value="{{ $settings_info['site_title']??old('settings_info[4][value]') }}"/>                               
+                            </div> 
+
+                            <div class="form-group field mb-3">
+                                <label for="site_description" class="col-form-label">Site Description</label>
+                                <input type="hidden" name="settings_info[5][key]" value="site_description"> 
+                                <input type="text" class="form-control" id="site_description" name="settings_info[5][value]" value="{{ $settings_info['site_description']??old('settings_info[5][value]') }}"/>                               
+                            </div> 
+
+                            <div class="form-group field mb-3">
+                                <label for="tagline" class="col-form-label">Tagline</label>
+                                <input type="hidden" name="settings_info[6][key]" value="tagline"> 
+                                <input type="text" class="form-control" id="tagline" name="settings_info[6][value]" value="{{ $settings_info['tagline']??old('settings_info[6][value]') }}"/>                               
+                            </div> 
+
+                            <div class="form-group field mb-3">
+                                <label for="site_icon" class="col-form-label">Site Icon</label>
+                                <input type="hidden" name="settings_info[7][key]" value="site_icon"> 
+                                <input type="file" class="form-control" id="site_icon" name="settings_info[7][value]" value="{{ $settings_info['site_icon']??old('settings_info[7][value]') }}"/>                               
+                                @if(isset($settings_info['site_icon']) && !empty($settings_info['site_icon']))
+                                <img src="{{ asset('uploads/'.$settings_info['site_icon']) }}" class="img-fluid img-thumbnail" width="150"> 
+                                @endif
+                            </div> 
+
+                            <div class="form-group field mb-3">
+                                <label for="blog_pagination" class="col-form-label">Blog Pagination</label>
+                                <input type="hidden" name="settings_info[8][key]" value="blog_pagination"> 
+                                <input type="text" class="form-control" id="blog_pagination" name="settings_info[8][value]" value="{{ $settings_info['blog_pagination']??old('settings_info[8][value]') }}"/>                               
+                            </div>
                             
                             <div class="col-12 d-flex justify-content-end">
                                 <button type="submit" class="btn btn-primary me-1 mb-1">Save</button>                                

@@ -167,6 +167,7 @@ class BlogPostController extends Controller
      */
     public function update(UpdateBlogPostRequest $request, $id)
     {
+       
         // $category->update($request->all());
             try{
         
@@ -204,10 +205,15 @@ class BlogPostController extends Controller
                    //meta tags
                    if(isset($request->meta_info)){
                     $meta_info  = $request->meta_info;
+                   
                     if(count($meta_info) > 0){
+                        
                     foreach ($meta_info as $meta) {
+                       
                         $meta_key = $meta['meta_key'];
+                        
                         if(isset($meta['meta_value'])){
+                           
                             $meta_value = $meta['meta_value'];
                             if($meta_value){
                                 if($meta_value instanceof UploadedFile && $meta_value->isValid())
@@ -217,8 +223,10 @@ class BlogPostController extends Controller
                                         $imageStorePath = public_path('uploads/blogs');
                                         $meta_file->move($imageStorePath, $meta_filename);
                                         $meta_value = $meta_filename;
-                                }                    
-                                BlogMetaInfos::where(['blog_id' => $id, 'meta_key' => $meta_key])->update([                             
+                                }    
+                                
+                                BlogMetaInfos::where(['blog_id' => $id, 'meta_key' => $meta_key])->updateOrCreate([   
+                                    'blog_id' => $id,                          
                                     'meta_key' => $meta_key,
                                     'meta_value' => $meta_value,                           
                                 ]);
