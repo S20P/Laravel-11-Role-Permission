@@ -25,10 +25,10 @@
    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu5nZKbeK-WHQ70oqOWo-_4VmwOwKP9YQ"></script>
    <script src="{{asset('plugins/google-map/gmap.js')}}"></script>
 
-   <script src="{{asset('js/script.js')}}"></script>
+   <script src="{{asset('js/script.js')}}?1"></script>
 
 
-   <script src="{{asset('js/common.js')}}"></script>
+   <script src="{{asset('js/common.js')}}?1"></script>
 
    @stack('scripts')
 
