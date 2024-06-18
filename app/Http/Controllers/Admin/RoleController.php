@@ -13,7 +13,7 @@ use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use DB;
 
-
+use Illuminate\Support\Facades\Auth;
 
 class RoleController extends Controller
 {
@@ -125,7 +125,10 @@ class RoleController extends Controller
         if($role->name=='Super Admin'){
             abort(403, 'SUPER ADMIN ROLE CAN NOT BE DELETED');
         }
-        if(auth()->user()->hasRole($role->name)){
+
+        $CurrentUser = Auth::guard('admin')->user();
+
+        if($CurrentUser->hasRole($role->name)){
             abort(403, 'CAN NOT DELETE SELF ASSIGNED ROLE');
         }
         $role->delete();

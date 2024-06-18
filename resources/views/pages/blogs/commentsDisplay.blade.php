@@ -2,10 +2,10 @@
 @if($comments && count($comments) > 0)   
   @foreach($comments as $comment)
     <div class="media mt-5" @if($comment->parent_id != null) style="margin-left:40px;" @endif>
-      <img src="{{asset('images/blog/post-1.jpg')}}" class="mr-4 img-fluid" alt="...">
+      <img src="{{asset('images/comment-avtar.png')}}" class="mr-4 img-fluid" alt="...">
       <div class="media-body">
         <h4 class="mt-0 mb-0">{{ $comment->name }}</h4>
-        <span>{{ $comment->created_at->format('d M Y, H:i') }}</span>
+        <span>{{ $comment->created_at->format('d M Y') }}</span>
         <p class="mt-2">{{ $comment->comment }}</p>
 
         <span><a href="#" class="btn reply-btn" data-id="{{$comment->id}}">Reply</a></span>

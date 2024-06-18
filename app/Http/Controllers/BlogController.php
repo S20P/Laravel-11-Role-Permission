@@ -46,10 +46,40 @@ class BlogController extends Controller
             $relatedBlogs = $this->getRelatedBlogs($blog);
             $trendingBlogs = BlogPost::orderBy('views', 'desc')->limit(5)->get();
     
+
+            $meta_info = $blog->metaInfos->toArray()??[];
+            $default_meta_keys = ["title","description","og_title","og_description","og_image"];
+
+            foreach($default_meta_keys as $key){
+                $metaKeyToFind = $key;
+                $result = array_filter($meta_info, function($item) use ($metaKeyToFind) {
+                    return isset($item['meta_key']) && $item['meta_key'] === $metaKeyToFind;
+                });
+
+            if (empty($result)) {
+                if($metaKeyToFind=="title"){
+                    array_push($meta_info,["meta_key" => $metaKeyToFind,"meta_value" => $blog->title]);
+                }
+                else if($metaKeyToFind=="description"){
+                    array_push($meta_info,["meta_key" => $metaKeyToFind,"meta_value" => $blog->short_description]);
+                }
+                else if($metaKeyToFind=="og_title"){
+                    array_push($meta_info,["meta_key" => $metaKeyToFind,"meta_value" => $blog->title]);
+                }
+                else if($metaKeyToFind=="og_description"){
+                    array_push($meta_info,["meta_key" => $metaKeyToFind,"meta_value" => $blog->short_description]);
+                }
+                else if($metaKeyToFind=="og_image"){
+                    array_push($meta_info,["meta_key" => $metaKeyToFind,"meta_value" => $blog->image]);
+                }
+            }  
+            }
+
+
             $categories = Category::withCount('blogs')->get();
             return view('pages.blogs.blog-details', [
                 'blog' => $blog,
-                'meta_info' => $blog->metaInfos??[],
+                'meta_info' => $meta_info??[],
                 'setting_info' => $blog->settings??[],
                 'categories' => $categories,
                 'relatedBlogs' => $relatedBlogs,

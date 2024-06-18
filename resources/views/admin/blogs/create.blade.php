@@ -48,7 +48,7 @@
                                 <label class="label">Category</label>
                                 <div class="control @error('categories_id') is-invalid @enderror">
                                     <div class="select">
-                                        <select class="choices form-select multiple-remove" name="categories_id[]" multiple="multiple">
+                                        <select class="choices form-select multiple-remove" name="categories_id[]">
                                             <optgroup label="Select category">
                                           
                                               @foreach ($categories as $category)

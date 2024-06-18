@@ -11,6 +11,7 @@ use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -117,10 +118,14 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Admin $user): RedirectResponse
+    public function destroy($id): RedirectResponse
     {
+
+        $user = Admin::find($id); 
+        $CurrentUser = Auth::guard('admin')->user();
+
         // About if user is Super Admin or User ID belongs to Auth User
-        if ($user->hasRole('Super Admin') || $user->id == auth()->user()->id)
+        if ($user->hasRole('Super Admin') || $user->id == $CurrentUser->id)
         {
             abort(403, 'USER DOES NOT HAVE THE RIGHT PERMISSIONS');
         }
