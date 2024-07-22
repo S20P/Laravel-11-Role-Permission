@@ -28,20 +28,19 @@
 					<h4 class="mb-4 text-white letter-spacing text-uppercase">Quick Links</h4>
 					<ul class="list-unstyled footer-menu lh-40 mb-0">
 						<li><a href="{{route("front.page.about")}}"><i class="ti-angle-double-right mr-2"></i>About Us</a></li>
-						<li><a href="service.html"><i class="ti-angle-double-right mr-2"></i>Services</a></li>
+						{{-- <li><a href="service.html"><i class="ti-angle-double-right mr-2"></i>Services</a></li>
 						<li><a href="pricing.html"><i class="ti-angle-double-right mr-2"></i>Membership</a></li>
-						<li><a href="course.html"><i class="ti-angle-double-right mr-2"></i>Courses</a></li>
+						<li><a href="course.html"><i class="ti-angle-double-right mr-2"></i>Courses</a></li> --}}
 						<li><a href="{{route("front.page.contact")}}"><i class="ti-angle-double-right mr-2"></i>Contact us</a></li>
 					</ul>
 				</div>
 			</div>
 			<div class="col-lg-3 col-md-5">
 				<div class="footer-widget">
-					<h4 class="mb-4 text-white letter-spacing text-uppercase">Home location</h4>
-					<p>Washington 6036 Richmond
-					hwy., Alexandria, VA USA 22303 </p>
-					<span class="text-white">+1 (409) 987–5874</span>
-					<span class="text-white">info@demolink.org</span>
+					<h4 class="mb-4 text-white letter-spacing text-uppercase">Office location</h4>
+					<p>1064 silver business point, VIP Cir, Uttran, Surat, Gujarat 394105 </p>
+					<span class="text-white">+75 7494 5107</span>
+					<span class="text-white">satish6073@gmail.com</span>
 				</div>
 			</div>
 		</div>

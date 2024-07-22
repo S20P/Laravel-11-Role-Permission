@@ -3,7 +3,7 @@
 <nav class="navbar navbar-expand-lg navigation fixed-top" id="navbar">
 	<div class="container-fluid">
 		<a class="navbar-brand" href="/">
-			<h2 class="text-white text-capitalize"></i>Gym<span class="text-color">Fit</span></h2>
+			<h2 class="text-white text-capitalize"></i>Youtube<span class="text-color">SEO</span></h2>
 		</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsid"
 			aria-controls="navbarsid" aria-expanded="false" aria-label="Toggle navigation">
@@ -14,7 +14,10 @@
 				<li class="nav-item active">	
 					<a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
 				</li>
-				<li class="nav-item dropdown">
+				<li class="nav-item">	
+					<a class="nav-link" href="{{route("front.page.about")}}">About</a>
+				</li>
+				{{-- <li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true"
 						aria-expanded="false">Pages.</a>
 					<ul class="dropdown-menu">
@@ -22,9 +25,9 @@
 						<li><a class="dropdown-item" href="trainer.html">Trainer</a></li>
 						<li><a class="dropdown-item" href="course.html">Courses</a></li>
 					</ul>
-				</li>
-				<li class="nav-item"><a class="nav-link" href="service.html">Services</a></li>
-				<li class="nav-item"><a class="nav-link" href="pricing.html">Memebership</a></li>
+				</li> --}}
+				{{-- <li class="nav-item"><a class="nav-link" href="service.html">Services</a></li>
+				<li class="nav-item"><a class="nav-link" href="pricing.html">Memebership</a></li> --}}
 
                <!-- Category Menus --->
 				@if(isset($g_category_menus) && is_array($g_category_menus))

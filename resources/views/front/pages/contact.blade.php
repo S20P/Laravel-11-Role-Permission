@@ -112,14 +112,14 @@
             <i class="ti-email mb-3 text-lg text-color"></i>
             <span>Email at</span>
             <p class="lead text-black mt-3 mb-0">satish6073@gmail.com</p>
-            <p class="lead text-black ">satish6073@gmail.com</p>
+            {{-- <p class="lead text-black ">satish6073@gmail.com</p> --}}
           </div>
         </div>
         <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
           <div class="card rounded-0 border-0 shadow-sm text-center py-5 px-4 contact-info">
             <i class="ti-home mb-3 text-lg text-color"></i>
             <span>Location</span>
-            <p class="lead text-black mt-3">Fitness Center Bedford Heights,North London, USA</p>
+            <p class="lead text-black mt-3">1064 silver business point, VIP Cir, Uttran, Surat, Gujarat 394105</p>
           </div>
         </div>
       </div>
