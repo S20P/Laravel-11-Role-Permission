@@ -18,7 +18,7 @@
 					<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true"
 						aria-expanded="false">Pages.</a>
 					<ul class="dropdown-menu">
-						<li><a class="dropdown-item" href="about.html">About</a></li>
+						<li><a class="dropdown-item" href="{{route("front.page.about")}}">About</a></li>
 						<li><a class="dropdown-item" href="trainer.html">Trainer</a></li>
 						<li><a class="dropdown-item" href="course.html">Courses</a></li>
 					</ul>
@@ -47,7 +47,7 @@
 						<li><a class="dropdown-item" href="blog-single.html">Blog Details</a></li>
 					</ul>
 				</li> --}}
-				<li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+				<li class="nav-item"><a class="nav-link" href="{{route("front.page.contact")}}">Contact</a></li>
 
                
                 @guest
@@ -83,11 +83,11 @@
             @endguest
 			</ul>
             
-			<div class="my-md-0 ml-lg-4 mt-4 mt-lg-0 ml-auto text-lg-right mb-3 mb-lg-0">
+			{{-- <div class="my-md-0 ml-lg-4 mt-4 mt-lg-0 ml-auto text-lg-right mb-3 mb-lg-0">
 				<a href="tel:+23-345-67890">
-					<h3 class="text-color mb-0"><i class="ti-mobile mr-2"></i>+23-563-5688</h3>
+					<h3 class="text-color mb-0"><i class="ti-mobile mr-2"></i>+</h3>
 				</a>
-			</div>
+			</div> --}}
 		</div>
 	</div>
 </nav>

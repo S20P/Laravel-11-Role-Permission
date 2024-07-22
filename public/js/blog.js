@@ -170,11 +170,15 @@ $(document).ready(function(e){
         var id = 'heading-' + index;
         heading.attr('id', id);
         // Create a link to the heading
+        console.log("text",text);
         var link = $('<a></a>').attr('href', '#' + id).text(text);
         // Create a list item for the TOC
         var listItem = $('<li></li>').addClass(level).append(link);
         // Append the list item to the TOC
-        toc.append(listItem);
+        if(text.length > 0){
+            toc.append(listItem);
+        }
+       
     });
 
 });

@@ -27,11 +27,11 @@
 				<div class="footer-widget">
 					<h4 class="mb-4 text-white letter-spacing text-uppercase">Quick Links</h4>
 					<ul class="list-unstyled footer-menu lh-40 mb-0">
-						<li><a href="about.html"><i class="ti-angle-double-right mr-2"></i>About Us</a></li>
+						<li><a href="{{route("front.page.about")}}"><i class="ti-angle-double-right mr-2"></i>About Us</a></li>
 						<li><a href="service.html"><i class="ti-angle-double-right mr-2"></i>Services</a></li>
 						<li><a href="pricing.html"><i class="ti-angle-double-right mr-2"></i>Membership</a></li>
 						<li><a href="course.html"><i class="ti-angle-double-right mr-2"></i>Courses</a></li>
-						<li><a href="contact.html"><i class="ti-angle-double-right mr-2"></i>Contact us</a></li>
+						<li><a href="{{route("front.page.contact")}}"><i class="ti-angle-double-right mr-2"></i>Contact us</a></li>
 					</ul>
 				</div>
 			</div>
