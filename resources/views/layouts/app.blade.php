@@ -8,6 +8,9 @@
       <!-- CSRF Token -->
       <meta name="csrf-token" content="{{ csrf_token() }}">
 
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7456798836103342"
+     crossorigin="anonymous"></script>
+
       @php
       $meta_title = "";
       $meta_description = "";
